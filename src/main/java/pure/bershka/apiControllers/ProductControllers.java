@@ -1,4 +1,4 @@
-package pure.bershka.api.controllers;
+package pure.bershka.apiControllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
