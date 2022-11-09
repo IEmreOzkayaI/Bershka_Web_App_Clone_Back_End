@@ -1,4 +1,4 @@
-package pure.bershka.dataAccess.abstracts;
+package pure.bershka.dataAccess;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
