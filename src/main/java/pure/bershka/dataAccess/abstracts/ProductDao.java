@@ -1,4 +1,4 @@
-package pure.bershka.dataAccess.concretes;
+package pure.bershka.dataAccess.abstracts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pure.bershka.entities.concretes.Product;
 
 @Repository
-public interface productService extends JpaRepository<Product, Integer> {
+public interface ProductDao extends JpaRepository<Product, Integer> {
 
 }
