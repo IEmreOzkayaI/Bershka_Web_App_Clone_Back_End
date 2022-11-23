@@ -49,6 +49,7 @@ public class User {
     private List<Order> order;
 
 
+
     @ManyToMany
     @JoinTable(name="locations", joinColumns = @JoinColumn(name = "user_id"),
                                     inverseJoinColumns = @JoinColumn(name="location_id"))

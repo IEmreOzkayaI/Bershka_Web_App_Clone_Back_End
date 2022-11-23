@@ -26,7 +26,4 @@ public class DiscountCode {
 
     @OneToMany(mappedBy = "discountCode")
     private List<Order> orders;
-
-
-
 }

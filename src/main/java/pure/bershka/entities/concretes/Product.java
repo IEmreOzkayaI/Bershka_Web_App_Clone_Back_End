@@ -34,6 +34,9 @@ public class Product {
     private List<Image> images;
 
     @OneToMany(mappedBy = "product")
+    private List<ReturnedProduct> returnedProducts;
+
+    @OneToMany(mappedBy = "product")
     private List<ProductSizeAmount> productSizeAmounts;
 
     @OneToMany(mappedBy = "product")
