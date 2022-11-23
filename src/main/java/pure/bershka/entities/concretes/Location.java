@@ -3,33 +3,38 @@ package pure.bershka.entities.concretes;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "location")
+@Table(name = "locations")
 public class Location {
     @Id
+    @Column(name = "location_id")
     private int locationId;
 
-    private String address;
-    private String city;
-    private String town;
-    private String mailBox;
-    @ManyToOne
-    private User user;
+    @Column(name = "location_title")
+    private String locationTitle;
 
-    public Location(String address, String city, String town, String mailBox, User user) {
-        this.address = address;
-        this.city = city;
-        this.town = town;
-        this.mailBox = mailBox;
-        this.user = user;
-    }
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "town")
+    private String town;
+
+    @Column(name = "post_code")
+    private String postCode;
+
+    @Column(name = "another_adress_info")
+    private String anotherAddressInfo;
+
+    @OneToMany(mappedBy = "location")
+    private List<Order> orders;
 
     public Location() {
     }
