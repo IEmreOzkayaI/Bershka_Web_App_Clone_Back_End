@@ -41,27 +41,21 @@ public class User {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @OneToMany(mappedBy = "user")
-    private List<Location> locationList;
-
-    @OneToOne // many to many olduğunda değişmeli
+    @ManyToOne
+    @JoinColumn(name = "last_location_id")
     private Location lastLocation;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> order;
+
+
+    @ManyToMany
+    @JoinTable(name="locations", joinColumns = @JoinColumn(name = "user_id"),
+                                    inverseJoinColumns = @JoinColumn(name="location_id"))
+    private List<Location> locations;
+
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String identityNumber,
-                String phoneNumber, String email, String password, Date addDate,
-                boolean isActive, List<Location> locationList, Location lastLocation) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.identityNumber = identityNumber;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.password = password;
-        this.addDate = addDate;
-        this.isActive = isActive;
-        this.locationList = locationList;
-        this.lastLocation = lastLocation;
-    }
 }
