@@ -1,26 +1,46 @@
 package pure.bershka.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import javax.persistence.*;
+import java.util.List;
+
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name="product")
+@Getter
+@Setter
 public class Product {
-	
-	@Column(name="id")
-	@Id
-	private int id;
-	
-	@Column(name="name")
-	private char name;
-	
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private int productID;
+
+    @ManyToOne
+    private Category category;
+
+    @ManyToOne
+    private Color color;
+
+    @ManyToOne
+    private Material material;
+
+    private String name;
+
+    @Lob
+    private String description;
+
+    private int price;
+
+    private String gender;
+
+    @ManyToMany
+    @JoinTable(name="campaign_id", joinColumns = @JoinColumn(name = "productId"),
+                                    inverseJoinColumns = @JoinColumn(name="discountId"))
+    private List<Discount> discountList;
+
+    @ManyToOne
+    private Size size;
+
+    public Product() {
+    }
 }
