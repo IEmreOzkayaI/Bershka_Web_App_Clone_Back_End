@@ -26,15 +26,19 @@ public class Refund {
     private boolean isOnline;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @ManyToOne
-    @JoinColumn(name = "inventory_id")
-    private Inventory inventory;
-
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "inventory_id")
+//    private Inventory inventory;
+
+
 
 }

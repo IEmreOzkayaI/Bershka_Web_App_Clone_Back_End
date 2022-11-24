@@ -26,9 +26,9 @@ public class Order {
     @JoinColumn(name = "location_id")
     private Location location;
 
-//    @ManyToOne
-//    @JoinColumn(name = "billing_location_id")
-//    private Location billingLocation;
+    @ManyToOne
+    @JoinColumn(name = "billing_location_id")
+    private Location billingLocation;
 
     @Column(name = "total_price")
     private int totalPrice;
@@ -39,6 +39,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
+
+
 
 //    @ManyToMany
 //    @JoinTable(name="order_detail", joinColumns = @JoinColumn(name = "order_id"),

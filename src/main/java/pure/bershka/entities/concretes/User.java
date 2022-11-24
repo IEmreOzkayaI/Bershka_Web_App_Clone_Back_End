@@ -47,9 +47,7 @@ public class User {
     private Location lastLocation;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> order;
-
-
+    private List<Order> orders;
 
     @ManyToMany
     @JoinTable(name="user_locations", joinColumns = @JoinColumn(name = "user_id"),
