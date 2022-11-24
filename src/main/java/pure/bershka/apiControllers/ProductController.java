@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin
-public class ProductControllers {
+public class ProductController {
 	
 	@GetMapping("/hi")
 	public String den() {
