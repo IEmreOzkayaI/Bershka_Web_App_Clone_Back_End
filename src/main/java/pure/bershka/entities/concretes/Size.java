@@ -13,13 +13,9 @@ import java.util.List;
 public class Size {
     @Id
     @Column(name = "size_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sizeID;
 
     @Column(name = "size_name")
     private String sizeName;
-
-    @OneToMany(mappedBy = "size")
-    private List<Inventory> productSizeAmounts;
-
-
 }

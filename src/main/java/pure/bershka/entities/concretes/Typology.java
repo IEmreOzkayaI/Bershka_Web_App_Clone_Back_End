@@ -11,12 +11,13 @@ import java.util.List;
 @Setter
 @Table(name="typologies")
 public class Typology {
-    @Column(name = "typology_id")
     @Id
-    private int typologyId;
+    @Column(name = "typology_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "typology_name")
-    private String typologyName;
+    private String name;
 
     @OneToMany(mappedBy = "typology")
     private List<Product> products;

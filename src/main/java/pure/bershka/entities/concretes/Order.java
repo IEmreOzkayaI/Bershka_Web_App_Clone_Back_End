@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -16,7 +17,8 @@ import java.util.List;
 public class Order {
     @Id
     @Column(name = "order_id")
-    private int orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -39,14 +41,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
-    
-	@OneToOne(mappedBy="order")
-	private OrderDetail orderDetail;
 
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> products;
 
-
-//    @ManyToMany
-//    @JoinTable(name="order_detail", joinColumns = @JoinColumn(name = "order_id"),
-//            inverseJoinColumns = @JoinColumn(name="order_detail_id"))
-//    private List<Inventory> inventories;
+    @OneToMany(mappedBy = "size")
+    private List<OrderDetail> sizes;
 }

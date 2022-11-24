@@ -13,6 +13,7 @@ import java.util.Date;
 public class Refund {
     @Id
     @Column(name = "refund_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int refundId;
 
     @Lob
@@ -29,16 +30,7 @@ public class Refund {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-
-//    @ManyToOne
-//    @JoinColumn(name = "order_id")
-//    private Order order;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "inventory_id")
-//    private Inventory inventory;
-
-
-
+    @OneToOne
+    @JoinColumn(name = "order_detail_id")
+    private OrderDetail orderDetail;
 }

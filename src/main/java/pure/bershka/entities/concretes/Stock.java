@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class Stock {
     @Id
     @Column(name = "stock_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

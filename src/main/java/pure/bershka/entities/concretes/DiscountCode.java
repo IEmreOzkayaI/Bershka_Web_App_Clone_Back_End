@@ -13,6 +13,7 @@ import java.util.List;
 public class DiscountCode {
     @Id
     @Column(name = "discount_code_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "discount_code")

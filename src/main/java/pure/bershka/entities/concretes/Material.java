@@ -13,13 +13,11 @@ import java.util.List;
 public class Material {
     @Id
     @Column(name = "material_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "material_name")
     private String name;
-
-    @Column(name = "material_percentage")
-    private int materialPercentage;
 
     @OneToMany(mappedBy = "material")
     private List<Product> products;

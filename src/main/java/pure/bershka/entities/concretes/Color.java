@@ -13,6 +13,7 @@ import java.util.List;
 public class Color {
     @Id
     @Column(name = "color_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "color_name")

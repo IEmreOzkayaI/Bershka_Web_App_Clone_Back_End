@@ -1,44 +1,33 @@
 package pure.bershka.entities.concretes;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import lombok.Data;
-
-@Data
 @Entity
-@Table(name="order_detail")
+@Getter
+@Setter
+@Table(name="order_details")
 public class OrderDetail {
+    @Id
+    @Column(name = "order_detail_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Id
-	@Column(name="order_detail_id")
-	private int id;
-	
-	@OneToOne
-	@JoinColumn(name="order_id")
-	private Order order;
-	
-	@ManyToMany
-	  @JoinTable(name="p_detail_products", joinColumns = @JoinColumn(name = "order_detail_id"),
-      inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private List<Product> product;
-	
-	@ManyToMany
-	  @JoinTable(name="p_detail_sizes", joinColumns = @JoinColumn(name = "order_detail_id"),
-      inverseJoinColumns = @JoinColumn(name = "size_id"))
-	private List<Size> size;
-	
-	@Column(name="piece_amount")
-	private int pieceAmount;
+    @OneToOne
+    @Column(name = "order_id")
+    private Order order;
 
-	
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private Size size;
+
+    @Column(name = "amount")
+    private int amount;
 }

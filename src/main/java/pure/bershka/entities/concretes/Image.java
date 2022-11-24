@@ -9,8 +9,9 @@ import javax.persistence.*;
 @Setter
 @Table(name = "images")
 public class Image {
-    @Column(name="image_id")
     @Id
+    @Column(name="image_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "img_url")

@@ -12,9 +12,9 @@ import java.util.List;
 @Setter
 @Table(name="products")
 public class Product {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name="product_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
@@ -51,20 +51,6 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<Image> images;
-
-
-    
-
-//    @OneToMany(mappedBy = "product")
-//    private List<Refund> returnedProducts;
-//
-//    @OneToMany(mappedBy = "product")
-//    private List<ProductSizeAmount> productSizeAmounts;
-
-//    @ManyToMany
-//    @JoinTable(name="campaigns", joinColumns = @JoinColumn(name = "product_id"),
-//                                    inverseJoinColumns = @JoinColumn(name="discount_id"))
-//    private List<Discount> campaigns;
 
     public Product() {
     }

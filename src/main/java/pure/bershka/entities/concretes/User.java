@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
-
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +47,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Order> order;
-
-
 
     @ManyToMany
     @JoinTable(name="user_locations", joinColumns = @JoinColumn(name = "user_id"),
