@@ -2,14 +2,14 @@ package pure.bershka.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pure.bershka.dataAccess.abstracts.ProductDao;
+import pure.bershka.dataAccess.abstracts.DiscountCodeDao;
 
 @Service
 public class DiscountCodeManager {
-    private ProductDao productDao;
+    private DiscountCodeDao discountCodeDao;
 
     @Autowired
-    public DiscountCodeManager(ProductDao productDao) {
-        this.productDao = productDao;
+    public DiscountCodeManager(DiscountCodeDao discountCodeDao) {
+        this.discountCodeDao = discountCodeDao;
     }
 }

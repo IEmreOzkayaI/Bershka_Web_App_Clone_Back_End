@@ -2,14 +2,14 @@ package pure.bershka.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pure.bershka.dataAccess.abstracts.ProductDao;
+import pure.bershka.dataAccess.abstracts.RefundDao;
 
 @Service
 public class RefundManager {
-    private ProductDao productDao;
+    private RefundDao refundDao;
 
     @Autowired
-    public RefundManager(ProductDao productDao) {
-        this.productDao = productDao;
+    public RefundManager(RefundDao refundDao) {
+        this.refundDao = refundDao;
     }
 }

@@ -2,14 +2,14 @@ package pure.bershka.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pure.bershka.dataAccess.abstracts.ProductDao;
+import pure.bershka.dataAccess.abstracts.CategoryDao;
 
 @Service
 public class CategoryManager {
-    private ProductDao productDao;
+    private CategoryDao categoryDao;
 
     @Autowired
-    public CategoryManager(ProductDao productDao) {
-        this.productDao = productDao;
+    public CategoryManager(CategoryDao categoryDao) {
+        this.categoryDao = categoryDao;
     }
 }

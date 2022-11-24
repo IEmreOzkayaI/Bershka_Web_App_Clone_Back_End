@@ -2,14 +2,13 @@ package pure.bershka.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pure.bershka.dataAccess.abstracts.ProductDao;
+import pure.bershka.dataAccess.abstracts.StockDao;
 
 @Service
 public class StockManager {
-    private ProductDao productDao;
-
+    private StockDao stockDao;
     @Autowired
-    public StockManager(ProductDao productDao) {
-        this.productDao = productDao;
+    public StockManager(StockDao stockDao) {
+        this.stockDao = stockDao;
     }
 }

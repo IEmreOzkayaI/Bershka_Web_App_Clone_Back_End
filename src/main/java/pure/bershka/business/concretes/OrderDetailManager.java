@@ -1,13 +1,15 @@
 package pure.bershka.business.concretes;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pure.bershka.dataAccess.abstracts.ProductDao;
+import pure.bershka.dataAccess.abstracts.OrderDetailDao;
 
 @Service
 public class OrderDetailManager {
-    private ProductDao productDao;
+    private OrderDetailDao orderDetailDao;
 
-    public OrderDetailManager(ProductDao productDao) {
-        this.productDao = productDao;
+    @Autowired
+    public OrderDetailManager(OrderDetailDao orderDetailDao) {
+        this.orderDetailDao = orderDetailDao;
     }
 }
