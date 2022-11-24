@@ -20,6 +20,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "total_price")
+    private int totalPrice;
+
+    @Column(name = "creation_date")
+    private Date creationDate;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -32,15 +38,13 @@ public class Order {
     @JoinColumn(name = "billing_location_id")
     private Location billingLocation;
 
-    @Column(name = "total_price")
-    private int totalPrice;
-
-    @Column(name = "creation_date")
-    private Date creationDate;
-
     @ManyToOne
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
+
+    @OneToOne
+    @JoinColumn(name = "order_detail_id")
+    private OrderDetail orderDetail;
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> products;

@@ -52,6 +52,12 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Image> images;
 
+    @ManyToMany(mappedBy = "basket")
+    private List<User> basketOfUsers;
+
+    @ManyToMany(mappedBy = "favorites")
+    private List<User> favoritesOfUsers;
+
     public Product() {
     }
 

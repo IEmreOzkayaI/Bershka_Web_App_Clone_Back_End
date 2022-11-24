@@ -62,7 +62,7 @@ public class User {
     @ManyToMany
     @JoinTable(name="favorites", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> favorite;
+    private List<Product> favorites;
 
     public User() {
     }

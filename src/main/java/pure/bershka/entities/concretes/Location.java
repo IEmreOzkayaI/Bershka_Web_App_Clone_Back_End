@@ -40,6 +40,9 @@ public class Location {
     @OneToMany(mappedBy = "lastLocation")
     private List<User> usersLastLocation;
 
+    @ManyToMany(mappedBy = "locations")
+    private List<User> users;
+
     public Location() {
     }
 }
