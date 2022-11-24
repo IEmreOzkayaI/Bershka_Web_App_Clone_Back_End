@@ -37,6 +37,9 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private List<Order> orders;
 
+    @OneToMany(mappedBy = "lastLocation")
+    private List<Order> usersLastLocation;
+
     public Location() {
     }
 }

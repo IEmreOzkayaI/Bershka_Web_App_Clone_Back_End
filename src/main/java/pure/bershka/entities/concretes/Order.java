@@ -26,9 +26,9 @@ public class Order {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @ManyToOne
-    @JoinColumn(name = "billing_location_id")
-    private Location billingLocation;
+//    @ManyToOne
+//    @JoinColumn(name = "billing_location_id")
+//    private Location billingLocation;
 
     @Column(name = "total_price")
     private int totalPrice;
@@ -40,8 +40,8 @@ public class Order {
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
 
-    @ManyToMany
-    @JoinTable(name="order_detail", joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name="inventory_id"))
-    private List<Inventory> inventories;
+//    @ManyToMany
+//    @JoinTable(name="order_detail", joinColumns = @JoinColumn(name = "order_id"),
+//            inverseJoinColumns = @JoinColumn(name="order_detail_id"))
+//    private List<Inventory> inventories;
 }
