@@ -13,10 +13,11 @@ import java.util.List;
 public class Location {
     @Id
     @Column(name = "location_id")
-    private int id;
+    private int locationId;
 
     @Column(name = "location_title")
-    private String title;
+    private String locationTitle;
+
 
     @Column(name = "address")
     private String address;
@@ -37,7 +38,7 @@ public class Location {
     private List<Order> orders;
 
     @OneToMany(mappedBy = "lastLocation")
-    private List<Order> lastLocationOfUsers;
+    private List<Order> usersLastLocation;
 
     public Location() {
     }
