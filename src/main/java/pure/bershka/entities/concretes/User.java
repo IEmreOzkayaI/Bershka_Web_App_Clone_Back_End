@@ -55,6 +55,16 @@ public class User {
                                     inverseJoinColumns = @JoinColumn(name="location_id"))
     private List<Location> locations;
 
+    @ManyToMany
+    @JoinTable(name="baskets", joinColumns = @JoinColumn(name = "user_id"),
+                                    inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> basket;
+
+
+    @ManyToMany
+    @JoinTable(name="favorites", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> favorite;
 
     public User() {
     }
