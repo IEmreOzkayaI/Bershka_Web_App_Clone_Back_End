@@ -39,6 +39,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
+    
+	@OneToOne(mappedBy="order")
+	private OrderDetail orderDetail;
 
 //    @ManyToMany
 //    @JoinTable(name="order_detail", joinColumns = @JoinColumn(name = "order_id"),

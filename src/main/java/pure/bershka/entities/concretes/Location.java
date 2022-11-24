@@ -18,7 +18,6 @@ public class Location {
     @Column(name = "location_title")
     private String locationTitle;
 
-
     @Column(name = "address")
     private String address;
 
@@ -38,7 +37,7 @@ public class Location {
     private List<Order> orders;
 
     @OneToMany(mappedBy = "lastLocation")
-    private List<Order> usersLastLocation;
+    private List<User> usersLastLocation;
 
     public Location() {
     }

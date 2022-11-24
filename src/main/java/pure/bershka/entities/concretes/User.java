@@ -49,8 +49,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> order;
 
-
-
     @ManyToMany
     @JoinTable(name="user_locations", joinColumns = @JoinColumn(name = "user_id"),
                                     inverseJoinColumns = @JoinColumn(name="location_id"))

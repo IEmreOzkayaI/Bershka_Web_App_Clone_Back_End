@@ -20,6 +20,7 @@ public class Size {
 
     @OneToMany(mappedBy = "size")
     private List<Inventory> productSizeAmounts;
+    
 
 
 }
