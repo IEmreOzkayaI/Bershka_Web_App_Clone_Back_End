@@ -17,32 +17,6 @@ public class Product {
     @Column(name="product_id")
     private int productID;
 
-    @ManyToOne
-    @JoinColumn(name="category_id")
-    private Category category;
-
-    @ManyToOne
-    @JoinColumn(name="color_id")
-    private Color color;
-
-    @ManyToOne
-    @JoinColumn(name="material_id")
-    private Material material;
-
-
-    @OneToMany(mappedBy = "product")
-    private List<Image> images;
-
-    @OneToMany(mappedBy = "product")
-    private List<ReturnedProduct> returnedProducts;
-
-    @OneToMany(mappedBy = "product")
-    private List<ProductSizeAmount> productSizeAmounts;
-
-    @OneToMany(mappedBy = "product")
-    private List<Typology> typologies;
-
-
     @Column(name = "name")
     private String name;
 
@@ -58,6 +32,32 @@ public class Product {
 
     @Column(name = "discount_percentage")
     private int discountPercentage;
+
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name="color_id")
+    private Color color;
+
+    @ManyToOne
+    @JoinColumn(name="material_id")
+    private Material material;
+
+    @ManyToOne
+    @JoinColumn(name = "typology_id")
+    private Typology typology;
+
+    @OneToMany(mappedBy = "product")
+    private List<Image> images;
+
+
+//    @OneToMany(mappedBy = "product")
+//    private List<Refund> returnedProducts;
+//
+//    @OneToMany(mappedBy = "product")
+//    private List<ProductSizeAmount> productSizeAmounts;
 
 //    @ManyToMany
 //    @JoinTable(name="campaigns", joinColumns = @JoinColumn(name = "product_id"),

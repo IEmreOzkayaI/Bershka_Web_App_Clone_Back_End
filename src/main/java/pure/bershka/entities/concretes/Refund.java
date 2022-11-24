@@ -9,18 +9,18 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name="returned_products")
-public class ReturnedProduct {
+@Table(name="refunds")
+public class Refund {
     @Id
-    @Column(name = "returned_product_id")
-    private int returnedProductId;
+    @Column(name = "refund_id")
+    private int refundId;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "request_date")
-    private Date requestDate;
+    @Column(name = "refund_date")
+    private Date refundDate;
 
     @Lob
     @Column(name = "cause")

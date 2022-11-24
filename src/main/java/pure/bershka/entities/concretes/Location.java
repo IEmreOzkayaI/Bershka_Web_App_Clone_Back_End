@@ -18,6 +18,7 @@ public class Location {
     @Column(name = "location_title")
     private String locationTitle;
 
+
     @Column(name = "address")
     private String address;
 
