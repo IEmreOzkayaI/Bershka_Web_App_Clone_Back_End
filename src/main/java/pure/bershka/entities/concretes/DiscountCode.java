@@ -13,16 +13,16 @@ import java.util.List;
 public class DiscountCode {
     @Id
     @Column(name = "discount_code_id")
-    private int discountCodeId;
+    private int id;
 
     @Column(name = "discount_code")
-    private String discountCode;
+    private String code;
 
     @Column(name = "discount_code_amount")
-    private int discountCodeAmount;
+    private int amount;
 
     @Column(name = "discount_price")
-    private int discountPrice;
+    private int price;
 
     @OneToMany(mappedBy = "discountCode")
     private List<Order> orders;

@@ -8,11 +8,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name="product_size_amounts")
-public class Inventory {
+@Table(name="stocks")
+public class Stock {
     @Id
     @Column(name = "stock_id")
-    private int stockId;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

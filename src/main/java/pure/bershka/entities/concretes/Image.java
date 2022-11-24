@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Image {
     @Column(name="image_id")
     @Id
-    private int imageId;
+    private int id;
 
     @Column(name = "img_url")
     private String url;

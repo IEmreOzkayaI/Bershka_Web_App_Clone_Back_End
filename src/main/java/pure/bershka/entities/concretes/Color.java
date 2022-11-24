@@ -13,10 +13,10 @@ import java.util.List;
 public class Color {
     @Id
     @Column(name = "color_id")
-    private int colorId;
+    private int id;
 
     @Column(name = "color_name")
-    private String colorName;
+    private String name;
 
     @OneToMany(mappedBy = "color")
     private List<Product> products;
