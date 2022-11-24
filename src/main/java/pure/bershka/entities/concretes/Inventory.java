@@ -4,14 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @Table(name="product_size_amounts")
-public class ProductSizeAmount {
-    @Column(name = "stock_id")
+public class Inventory {
     @Id
+    @Column(name = "stock_id")
     private int stockId;
 
     @ManyToOne

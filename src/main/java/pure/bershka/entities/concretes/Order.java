@@ -42,6 +42,6 @@ public class Order {
 
     @ManyToMany
     @JoinTable(name="order_detail", joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name="product_id"))
-    private List<Product> products;
+            inverseJoinColumns = @JoinColumn(name="inventory_id"))
+    private List<Inventory> inventories;
 }

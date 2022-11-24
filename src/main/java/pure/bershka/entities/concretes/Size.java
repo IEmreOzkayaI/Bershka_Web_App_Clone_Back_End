@@ -19,7 +19,7 @@ public class Size {
     private String sizeName;
 
     @OneToMany(mappedBy = "size")
-    private List<ProductSizeAmount> productSizeAmounts;
+    private List<Inventory> productSizeAmounts;
 
 
 }
