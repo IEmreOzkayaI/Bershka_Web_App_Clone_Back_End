@@ -10,7 +10,6 @@ import pure.bershka.business.abstracts.CategoryService;
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController {
-
     private CategoryService categoryService;
 
     @Autowired
