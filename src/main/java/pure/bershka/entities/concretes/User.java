@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name="users")
 @Getter
 @Setter
-public class User {
+public class User extends Person{
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +47,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Order> order;
+
+    @OneToMany(mappedBy = "user")
+    private List<Refund> refunds;
 
     @ManyToMany
     @JoinTable(name="user_locations", joinColumns = @JoinColumn(name = "user_id"),
