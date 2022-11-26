@@ -21,4 +21,7 @@ public class Color {
 
     @OneToMany(mappedBy = "color")
     private List<Product> products;
+
+    @ManyToMany(mappedBy = "colors")
+    private List<Category> categories;
 }

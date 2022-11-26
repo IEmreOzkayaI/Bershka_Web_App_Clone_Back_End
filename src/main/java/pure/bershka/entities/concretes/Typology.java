@@ -16,6 +16,9 @@ public class Typology {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToMany(mappedBy = "typologies")
+    private List<Category> categories;
+
     @Column(name = "typology_name")
     private String name;
 
