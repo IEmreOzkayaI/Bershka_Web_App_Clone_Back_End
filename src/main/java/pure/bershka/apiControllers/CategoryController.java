@@ -1,10 +1,10 @@
 package pure.bershka.apiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pure.bershka.business.abstracts.CategoryService;
+import pure.bershka.core.utilities.result.Result;
+import pure.bershka.entities.concretes.Category;
 
 @CrossOrigin
 @RestController
@@ -12,6 +12,10 @@ import pure.bershka.business.abstracts.CategoryService;
 public class CategoryController {
     private CategoryService categoryService;
 
+    @PostMapping
+    public Result add(@RequestBody Category category){
+        return this.categoryService.add(category);
+    }
     @Autowired
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;

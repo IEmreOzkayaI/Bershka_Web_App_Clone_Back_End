@@ -42,9 +42,9 @@ public class Order {
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
 
-    @OneToOne
+    @OneToMany(mappedBy = "order")
     @JoinColumn(name = "order_detail_id")
-    private OrderDetail orderDetail;
+    private List<OrderDetail> orderDetails;
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> products;
