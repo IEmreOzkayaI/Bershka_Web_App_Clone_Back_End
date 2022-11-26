@@ -28,7 +28,7 @@ public class Refund {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Customer customer;
 
     @OneToOne
     @JoinColumn(name = "order_detail_id")

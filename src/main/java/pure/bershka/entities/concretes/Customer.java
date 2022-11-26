@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
+@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "user_id")
 @Table(name = "customers")
 public class Customer extends User {
 
@@ -39,8 +39,11 @@ public class Customer extends User {
     @JoinColumn(name = "last_location_id")
     private Location lastLocation;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "customer")
     private List<Order> order;
+    
+    @OneToMany(mappedBy = "customer")
+    private List<Refund> refunds;
 
     @ManyToMany
     @JoinTable(name="user_locations", joinColumns = @JoinColumn(name = "user_id"),

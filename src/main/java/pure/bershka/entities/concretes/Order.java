@@ -28,7 +28,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
@@ -43,7 +43,7 @@ public class Order {
     private DiscountCode discountCode;
 
     @OneToMany(mappedBy = "order")
-    @JoinColumn(name = "order_detail_id")
+//    @JoinColumn(name = "order_detail_id")
     private List<OrderDetail> orderDetails;
 
     @OneToMany(mappedBy = "product")

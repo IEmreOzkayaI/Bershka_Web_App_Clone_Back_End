@@ -38,10 +38,10 @@ public class Location {
     private List<Order> orders;
 
     @OneToMany(mappedBy = "lastLocation")
-    private List<User> usersLastLocation;
+    private List<Customer> customersLastLocation;
 
     @ManyToMany(mappedBy = "locations")
-    private List<User> users;
+    private List<Customer> customers;
 
     public Location() {
     }

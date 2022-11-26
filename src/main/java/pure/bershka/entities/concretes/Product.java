@@ -53,10 +53,10 @@ public class Product {
     private List<Image> images;
 
     @ManyToMany(mappedBy = "basket")
-    private List<User> basketOfUsers;
+    private List<Customer> basketOfCustomers;
 
     @ManyToMany(mappedBy = "favorites")
-    private List<User> favoritesOfUsers;
+    private List<Customer> favoritesOfCustomers;
 
     public Product() {
     }
