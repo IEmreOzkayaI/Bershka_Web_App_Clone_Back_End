@@ -18,10 +18,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "user_id")
 @Table(name = "customers")
 public class Customer extends User {

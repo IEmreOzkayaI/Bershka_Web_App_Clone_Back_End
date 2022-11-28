@@ -1,16 +1,18 @@
 package pure.bershka.entities.concretes;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
+
+@Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="users")
-@Getter
-@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id

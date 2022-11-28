@@ -1,21 +1,26 @@
 package pure.bershka.entities.concretes;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
+
+@Data
 @Entity
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "categories")
 public class Category {
+
+	
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
 
     @ManyToMany
     @JoinTable(name="typologies_for_category", joinColumns = @JoinColumn(name = "category_id"),

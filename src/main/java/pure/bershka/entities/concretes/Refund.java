@@ -1,14 +1,16 @@
 package pure.bershka.entities.concretes;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Entity
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="refunds")
 public class Refund {
     @Id

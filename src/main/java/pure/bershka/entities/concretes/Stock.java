@@ -1,13 +1,19 @@
 package pure.bershka.entities.concretes;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 import javax.persistence.*;
 
+@Data
 @Entity
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="stocks")
 public class Stock {
     @Id

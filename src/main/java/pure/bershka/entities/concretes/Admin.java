@@ -1,5 +1,7 @@
 package pure.bershka.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -10,8 +12,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Entity
+@EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "user_id")
 @Table(name = "admins")
 public class Admin extends User {

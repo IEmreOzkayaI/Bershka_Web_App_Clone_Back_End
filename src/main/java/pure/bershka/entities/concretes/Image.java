@@ -1,23 +1,26 @@
 package pure.bershka.entities.concretes;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+@Data
 @Entity
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "images")
 public class Image {
-    @Id
-    @Column(name="image_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@Column(name = "image_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @Column(name = "img_url")
-    private String url;
+	@Column(name = "img_url")
+	private String url;
 
-    @ManyToOne
-    @JoinColumn(name="product_id")
-    private Product product;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
 }

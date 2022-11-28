@@ -1,14 +1,17 @@
 package pure.bershka.entities.concretes;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 import java.util.List;
 
+@Data
 @Entity
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "locations")
 public class Location {
     @Id
@@ -43,6 +46,4 @@ public class Location {
     @ManyToMany(mappedBy = "locations")
     private List<Customer> customers;
 
-    public Location() {
-    }
 }
