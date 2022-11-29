@@ -34,5 +34,5 @@ public class ProductController {
 	public Result add(@RequestBody Product product){
 		return this.productService.add(product);
 	}
-	
+
 }

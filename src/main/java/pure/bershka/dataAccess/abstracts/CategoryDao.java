@@ -6,4 +6,6 @@ import pure.bershka.entities.concretes.Category;
 
 @Repository
 public interface CategoryDao extends JpaRepository<Category, Integer> {
+	
+	Category getById(int id);
 }
