@@ -1,5 +1,7 @@
+/*
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,8 @@ public class Material {
     @Column(name = "material_name")
     private String name;
 
-    @OneToMany(mappedBy = "material")
+    @JsonIgnore
+    @OneToMany(mappedBy = "material", fetch = FetchType.LAZY)
     private List<Product> products;
 }
+*/

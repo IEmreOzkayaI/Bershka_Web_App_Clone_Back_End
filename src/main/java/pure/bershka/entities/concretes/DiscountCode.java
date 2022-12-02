@@ -1,5 +1,6 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class DiscountCode {
 	@Column(name = "discount_price")
 	private int price;
 
-	@OneToMany(mappedBy = "discountCode")
+	@JsonIgnore
+	@OneToMany(mappedBy = "discountCode", fetch = FetchType.LAZY)
 	private List<Order> orders;
 }

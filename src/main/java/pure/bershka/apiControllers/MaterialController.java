@@ -1,3 +1,4 @@
+/*
 package pure.bershka.apiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,3 +18,4 @@ public class MaterialController {
         this.materialService = materialService;
     }
 }
+*/

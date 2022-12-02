@@ -1,6 +1,7 @@
 package pure.bershka.entities.concretes;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class Order {
     private Date creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne
@@ -42,13 +43,16 @@ public class Order {
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
 
-    @OneToMany(mappedBy = "order")
+    @JsonIgnore
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
 //    @JoinColumn(name = "order_detail_id")
     private List<OrderDetail> orderDetails;
 
-    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderDetail> products;
 
-    @OneToMany(mappedBy = "size")
+    @JsonIgnore
+    @OneToMany(mappedBy = "size", fetch = FetchType.LAZY)
     private List<OrderDetail> sizes;
 }

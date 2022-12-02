@@ -2,9 +2,7 @@ package pure.bershka.entities.concretes;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "user_id")
 @Table(name = "admins")
 public class Admin extends User {
-
+    @Id
+    @Column(name = "admin_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 }

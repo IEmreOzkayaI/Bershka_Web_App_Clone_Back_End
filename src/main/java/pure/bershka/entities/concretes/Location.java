@@ -1,5 +1,6 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,16 +35,16 @@ public class Location {
     @Column(name = "post_code")
     private String postCode;
 
-    @Column(name = "another_adress_info")
-    private String anotherAddressInfo;
-
-    @OneToMany(mappedBy = "location")
+    @JsonIgnore
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "lastLocation")
+    @JsonIgnore
+    @OneToMany(mappedBy = "lastLocation", fetch = FetchType.LAZY)
     private List<Customer> customersLastLocation;
 
-    @ManyToMany(mappedBy = "locations")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "locations", fetch = FetchType.LAZY)
     private List<Customer> customers;
 
 }

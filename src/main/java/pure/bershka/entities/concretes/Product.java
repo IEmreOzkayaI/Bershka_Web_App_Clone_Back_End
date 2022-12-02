@@ -1,6 +1,7 @@
 package pure.bershka.entities.concretes;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -24,15 +25,12 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Lob
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "price")
     private int price;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private String gender;
+    private Gender gender;
 
     @Column(name = "discount_percentage")
     private int discountPercentage;
@@ -45,21 +43,30 @@ public class Product {
     @JoinColumn(name="color_id")
     private Color color;
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name="material_id")
-    private Material material;
+    private Material material;*/
 
     @ManyToOne
     @JoinColumn(name = "typology_id")
     private Typology typology;
 
-    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name="product_sizes", joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "size_id"))
+    private List<Size> sizes;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Image> images;
 
-    @ManyToMany(mappedBy = "basket")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "basket", fetch = FetchType.LAZY)
     private List<Customer> basketOfCustomers;
 
-    @ManyToMany(mappedBy = "favorites")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
     private List<Customer> favoritesOfCustomers;
 
 }

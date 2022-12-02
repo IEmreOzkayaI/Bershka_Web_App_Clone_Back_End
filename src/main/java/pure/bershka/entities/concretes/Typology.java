@@ -1,5 +1,6 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -22,12 +23,18 @@ public class Typology {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(mappedBy = "typologies")
-    private List<Category> categories;
-
     @Column(name = "typology_name")
     private String name;
 
-    @OneToMany(mappedBy = "typology")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "typology", fetch = FetchType.LAZY)
     private List<Product> products;
 }

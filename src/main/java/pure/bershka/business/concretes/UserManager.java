@@ -1,3 +1,4 @@
+/*
 package pure.bershka.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,3 +27,4 @@ public class UserManager implements UserService {
 		}
 	}
 }
+*/

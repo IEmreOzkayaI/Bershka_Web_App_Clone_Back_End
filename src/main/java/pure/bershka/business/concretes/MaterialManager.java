@@ -1,3 +1,4 @@
+/*
 package pure.bershka.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,3 +15,4 @@ public class MaterialManager implements MaterialService {
         this.materialDao = materialDao;
     }
 }
+*/

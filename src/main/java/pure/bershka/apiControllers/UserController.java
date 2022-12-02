@@ -1,3 +1,4 @@
+/*
 package pure.bershka.apiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,3 +29,4 @@ public class UserController {
 		return this.userService.signIn(email, password);
 	}
 }
+*/

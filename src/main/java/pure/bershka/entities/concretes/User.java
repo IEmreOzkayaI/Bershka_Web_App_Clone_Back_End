@@ -9,17 +9,12 @@ import java.util.Date;
 
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedSuperclass
 @Table(name="users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-    @Id
-    @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
     @Column(name = "first_name")
     private String firstName;
 

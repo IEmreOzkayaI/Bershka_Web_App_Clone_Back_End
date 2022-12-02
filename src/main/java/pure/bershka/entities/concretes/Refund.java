@@ -16,7 +16,7 @@ public class Refund {
     @Id
     @Column(name = "refund_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int refundId;
+    private int id;
 
     @Lob
     @Column(name = "cause")
@@ -29,7 +29,7 @@ public class Refund {
     private boolean isOnline;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @OneToOne

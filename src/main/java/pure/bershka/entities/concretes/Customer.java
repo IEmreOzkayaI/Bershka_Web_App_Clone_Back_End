@@ -2,16 +2,9 @@ package pure.bershka.entities.concretes;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,9 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "user_id")
 @Table(name = "customers")
 public class Customer extends User {
+    @Id
+    @Column(name = "customer_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "identity_number")
     private String identityNumber;
@@ -39,25 +35,29 @@ public class Customer extends User {
     @JoinColumn(name = "last_location_id")
     private Location lastLocation;
 
-    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Order> order;
-    
-    @OneToMany(mappedBy = "customer")
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Refund> refunds;
 
+    @JsonIgnore
     @ManyToMany
-    @JoinTable(name="user_locations", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name="customer_locations", joinColumns = @JoinColumn(name = "customer_id"),
                                     inverseJoinColumns = @JoinColumn(name="location_id"))
     private List<Location> locations;
 
+    @JsonIgnore
     @ManyToMany
-    @JoinTable(name="baskets", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name="baskets", joinColumns = @JoinColumn(name = "customer_id"),
                                     inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> basket;
 
-
+    @JsonIgnore
     @ManyToMany
-    @JoinTable(name="favorites", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name="favorites", joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> favorites;
 }

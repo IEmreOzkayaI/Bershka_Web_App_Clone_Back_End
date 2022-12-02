@@ -1,5 +1,6 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class Size {
 	@Column(name = "size_name")
 	private String sizeName;
 
-	@ManyToMany(mappedBy = "sizes")
-	private List<Category> categories;
-
+	@JsonIgnore
+	@ManyToMany(mappedBy = "sizes", fetch = FetchType.LAZY)
+	private List<Product> products;
 }

@@ -27,10 +27,6 @@ public class Color {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "color")
+    @OneToMany(mappedBy = "color", fetch = FetchType.LAZY)
     private List<Product> products;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "colors")
-    private List<Category> categories;
 }
