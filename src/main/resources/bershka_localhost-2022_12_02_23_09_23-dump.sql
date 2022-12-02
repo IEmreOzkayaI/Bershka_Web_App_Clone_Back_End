@@ -407,10 +407,10 @@ ALTER TABLE public.product_sizes OWNER TO postgres;
 
 CREATE TABLE public.products (
     product_id integer NOT NULL,
-    discount_percentage integer,
+    discount_percentage numeric,
     gender character varying(255),
     name character varying(255),
-    price integer,
+    price numeric,
     category_id integer,
     color_id integer,
     typology_id integer
@@ -1211,8 +1211,8 @@ COPY public.product_sizes (product_id, size_id) FROM stdin;
 --
 
 COPY public.products (product_id, discount_percentage, gender, name, price, category_id, color_id, typology_id) FROM stdin;
-1	0	MALE	Wide leg 90's jean	600	1	4	13
-2	0	MALE	Desenli kapüşonlu sweatshirt	500	1	5	5
+2	0.00	MALE	Desenli kapüşonlu sweatshirt	500.00	1	5	5
+1	0	MALE	Wide leg 90's jean	600.00	1	4	13
 \.
 
 

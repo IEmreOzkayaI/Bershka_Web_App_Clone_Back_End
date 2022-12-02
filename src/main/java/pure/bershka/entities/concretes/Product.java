@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -16,7 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="products")
-public class Product {
+
+public class Product{
     @Id
     @Column(name="product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +29,14 @@ public class Product {
     private String name;
 
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;
 
     @Column(name = "discount_percentage")
-    private int discountPercentage;
+    private BigDecimal discountPercentage;
 
     @ManyToOne
     @JoinColumn(name="category_id")

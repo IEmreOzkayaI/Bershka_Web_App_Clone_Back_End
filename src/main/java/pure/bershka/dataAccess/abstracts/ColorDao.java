@@ -7,4 +7,5 @@ import pure.bershka.entities.concretes.Color;
 @Repository
 public interface ColorDao extends JpaRepository<Color,Integer> {
 	Color getById(int id);
+
 }
