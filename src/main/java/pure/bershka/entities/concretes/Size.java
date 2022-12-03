@@ -21,10 +21,10 @@ import java.util.List;
 public class Size {
 	@Id
 	@Column(name = "size_id")
-	private int sizeID;
+	private int id;
 
 	@Column(name = "size_name")
-	private String sizeName;
+	private String name;
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "sizes", fetch = FetchType.LAZY)
