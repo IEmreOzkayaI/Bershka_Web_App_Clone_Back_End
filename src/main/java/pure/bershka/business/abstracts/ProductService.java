@@ -13,6 +13,10 @@ public interface ProductService {
     DataResult<List<Product>> getAll();
     Result add(Product product);
 
+    Result update(int productId, Product product);
+
+    Result delete(int productId);
+
     DataResult<Product> getProduct(int id);
 
     DataResult<List<Product>> getByNameLike(String name);

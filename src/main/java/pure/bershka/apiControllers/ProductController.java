@@ -38,6 +38,16 @@ public class ProductController {
 		return this.productService.add(product);
 	}
 
+	@PutMapping("/update")
+	public Result update(int id, @RequestBody Product product){
+		return this.productService.update(id, product);
+	}
+
+	@DeleteMapping("/delete")
+	public Result delete(int id){
+		return this.productService.delete(id);
+	}
+
 	@GetMapping("/get-product")
 	public DataResult<Product> getProduct(int id){
 		return this.productService.getProduct(id);

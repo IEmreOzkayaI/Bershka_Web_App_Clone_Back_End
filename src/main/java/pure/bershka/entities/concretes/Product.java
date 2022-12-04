@@ -72,4 +72,10 @@ public class Product{
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
     private List<Customer> favoritesOfCustomers;
 
+    public void setProduct(Product product){
+        this.name = product.getName();
+        this.price = product.getPrice();
+        this.gender = product.getGender();
+        this.discountPercentage = product.getDiscountPercentage();
+    }
 }

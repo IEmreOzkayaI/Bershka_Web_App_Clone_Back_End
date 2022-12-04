@@ -134,4 +134,18 @@ public class ProductManager implements ProductService {
 	public DataResult<List<Product>> getByFilterCategoryAndColorAndPrice(String category, String color, BigDecimal min, BigDecimal max) {
 		return new SuccessDataResult<>(this.productDao.getByFilterCategoryAndColorAndPrice(category,color,min,max));
 	}
+
+	@Override
+	public Result update(int productId, Product product){
+		Product updateProduct = this.productDao.findById(productId).get();
+		updateProduct.setProduct(product);
+		return new SuccessResult();
+	}
+
+	@Override
+	public  Result delete(int productId){
+		Product product = this.productDao.findById(productId).get();
+		this.productDao.delete(product);
+		return new SuccessResult();
+	}
 }
