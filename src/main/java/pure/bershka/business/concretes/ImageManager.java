@@ -5,8 +5,13 @@ import org.springframework.stereotype.Service;
 import pure.bershka.business.abstracts.ImageService;
 import pure.bershka.core.utilities.result.Result;
 import pure.bershka.core.utilities.result.SuccessResult;
+import pure.bershka.core.utilities.result.DataResult;
+import pure.bershka.core.utilities.result.SuccessDataResult;
 import pure.bershka.dataAccess.abstracts.ImageDao;
 import pure.bershka.entities.concretes.Image;
+import pure.bershka.entities.concretes.Image;
+
+import java.util.List;
 
 @Service
 public class ImageManager implements ImageService {
@@ -37,5 +42,11 @@ public class ImageManager implements ImageService {
         updatedImage.setImage(image);
         this.imageDao.save(updatedImage);
         return new SuccessResult();
+    }
+
+
+    @Override
+    public DataResult<List<Image>> getProductImages(int productId) {
+        return new SuccessDataResult<>(this.imageDao.getByProduct_Id(productId));
     }
 }
