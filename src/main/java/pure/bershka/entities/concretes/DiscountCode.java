@@ -32,4 +32,10 @@ public class DiscountCode {
 	@JsonIgnore
 	@OneToMany(mappedBy = "discountCode", fetch = FetchType.LAZY)
 	private List<Order> orders;
+
+	public void setDiscountCode(DiscountCode discountCode){
+		this.code = discountCode.getCode();
+		this.amount = discountCode.getAmount();
+		this.price = discountCode.getPrice();
+	}
 }

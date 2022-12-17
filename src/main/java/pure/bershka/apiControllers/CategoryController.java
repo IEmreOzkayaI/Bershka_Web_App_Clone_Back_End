@@ -30,4 +30,13 @@ public class CategoryController {
 	public DataResult<List<Category>> getAll() {
 		return this.categoryService.getAll();
 	};
+
+	@PutMapping("/update")
+	public Result update(int categoryId, @RequestBody Category category){
+		return this.categoryService.updateCategory(categoryId,category);
+	}
+	@DeleteMapping("/delete")
+	public Result delete(int categoryId){
+		return this.categoryService.deleteCategory(categoryId);
+	}
 }

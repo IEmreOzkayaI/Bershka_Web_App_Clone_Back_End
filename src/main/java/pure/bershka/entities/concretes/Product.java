@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,9 +24,11 @@ public class Product{
     @Id
     @Column(name="product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int id;
 
     @Column(name = "name")
+    @NotBlank
     private String name;
 
     @Column(name = "price")
@@ -33,17 +36,22 @@ public class Product{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
+    @NotNull
     private Gender gender;
 
     @Column(name = "discount_percentage")
+    @Min(0)
+    @Max(100)
     private BigDecimal discountPercentage;
 
     @ManyToOne
     @JoinColumn(name="category_id")
+    @NotNull
     private Category category;
 
     @ManyToOne
     @JoinColumn(name="color_id")
+    @NotNull
     private Color color;
 
 /*    @ManyToOne
@@ -52,6 +60,7 @@ public class Product{
 
     @ManyToOne
     @JoinColumn(name = "typology_id")
+    @NotNull
     private Typology typology;
 
     @JsonIgnore
@@ -62,14 +71,17 @@ public class Product{
 
     @JsonIgnore
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @NotEmpty
     private List<Image> images;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "basket", fetch = FetchType.LAZY)
+    @NotEmpty
     private List<Customer> basketOfCustomers;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
+    @NotEmpty
     private List<Customer> favoritesOfCustomers;
 
     public void setProduct(Product product){

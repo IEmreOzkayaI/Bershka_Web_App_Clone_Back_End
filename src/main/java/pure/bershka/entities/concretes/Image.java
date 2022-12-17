@@ -23,4 +23,8 @@ public class Image {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+
+	public void setImage(Image image){
+		this.url = image.getUrl();
+	}
 }

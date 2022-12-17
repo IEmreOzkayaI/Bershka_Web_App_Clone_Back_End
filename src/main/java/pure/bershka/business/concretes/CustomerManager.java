@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pure.bershka.business.abstracts.CustomerService;
-import pure.bershka.core.utilities.result.ErrorResult;
-import pure.bershka.core.utilities.result.Result;
-import pure.bershka.core.utilities.result.SuccessResult;
+import pure.bershka.core.utilities.result.*;
 import pure.bershka.dataAccess.abstracts.CustomerDao;
 import pure.bershka.entities.concretes.Customer;
 import pure.bershka.entities.dtos.CustomerDto;
@@ -46,4 +44,25 @@ public class CustomerManager implements CustomerService {
 		
 	}
 
+	@Override
+	public DataResult<Customer> getCustomer(String email, String password) {
+		return new SuccessDataResult<>(this.customerDao.getCustomerInfo(email,password));
+	}
+
+
+	// FOR ADMIN
+	@Override
+	public Result updateCustomer(int customerId, Customer customer){
+		Customer updatedCustomer = this.customerDao.findById(customerId).get();
+		updatedCustomer.setCustomer(customer);
+		this.customerDao.save(updatedCustomer);
+		return new SuccessResult();
+	}
+	@Override
+	public Result deleteCustomer(int customerId){
+		Customer deletedCustomer = this.customerDao.findById(customerId).get();
+		this.customerDao.delete(deletedCustomer);
+		return new SuccessResult();
+
+	}
 }

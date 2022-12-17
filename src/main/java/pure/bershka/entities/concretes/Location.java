@@ -47,4 +47,12 @@ public class Location {
     @ManyToMany(mappedBy = "locations", fetch = FetchType.LAZY)
     private List<Customer> customers;
 
+    public void setLocation(Location location){
+        this.title = location.getTitle();
+        this.city = location.getCity();
+        this.address = location.getAddress();
+        this.town = location.getTown();
+        this.postCode = location.getPostCode();
+    }
+
 }

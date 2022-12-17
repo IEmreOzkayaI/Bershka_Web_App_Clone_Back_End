@@ -3,6 +3,8 @@ package pure.bershka.entities.concretes;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -20,12 +22,15 @@ public class Customer extends User {
     @Id
     @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int id;
 
     @Column(name = "identity_number")
+    @NotBlank
     private String identityNumber;
 
     @Column(name = "phone_number")
+    @NotNull
     private String phoneNumber;
     
     @Column(name = "is_active")
@@ -33,13 +38,14 @@ public class Customer extends User {
     
     @ManyToOne
     @JoinColumn(name = "last_location_id")
+    @NotNull
     private Location lastLocation;
 
     @JsonIgnore
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Order> order;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Refund> refunds;
 
@@ -60,4 +66,12 @@ public class Customer extends User {
     @JoinTable(name="favorites", joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> favorites;
+
+    public void setCustomer(Customer customer){
+        this.phoneNumber = customer.getPhoneNumber();
+        this.setFirstName(customer.getFirstName());
+        this.phoneNumber = customer.getPhoneNumber();
+        this.setEmail(customer.getEmail());
+        this.setPassword(customer.getPassword());
+    }
 }

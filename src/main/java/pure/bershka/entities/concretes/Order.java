@@ -55,4 +55,8 @@ public class Order {
     @JsonIgnore
     @OneToMany(mappedBy = "size", fetch = FetchType.LAZY)
     private List<OrderDetail> sizes;
+
+    public void setOrder(Order order){
+        this.location = order.getLocation();
+    }
 }

@@ -31,4 +31,11 @@ public class ColorManager implements ColorService {
 	public DataResult<List<Color>> getAll() {
 		return new SuccessDataResult<List<Color>>(this.colorDao.findAll(), "succes");
 	}
+
+	@Override
+	public Result deleteColor(int colorId) {
+		Color deletedColor = this.colorDao.findById(colorId).get();
+		this.colorDao.delete(deletedColor);
+		return new SuccessResult();
+	}
 }

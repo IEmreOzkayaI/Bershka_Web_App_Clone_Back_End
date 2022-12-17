@@ -1,12 +1,10 @@
 package pure.bershka.apiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pure.bershka.business.abstracts.TypologyService;
 import pure.bershka.core.utilities.result.DataResult;
+import pure.bershka.core.utilities.result.Result;
 import pure.bershka.entities.concretes.Typology;
 
 import java.util.List;
@@ -25,5 +23,18 @@ public class TypologyController {
     @GetMapping("/list-typologies")
     public DataResult<List<Typology>> listTypologies(int categoryId){
         return this.typologyService.listCategories(categoryId);
+    }
+
+   @PostMapping("/add")
+    public Result add(@RequestBody Typology typology){
+        return this.typologyService.addTypology(typology);
+    }
+    @PutMapping("/update")
+    public Result update(int typologyId, @RequestBody Typology typology){
+        return this.typologyService.updateTypology(typologyId,typology);
+    }
+    @DeleteMapping("/delete")
+    public Result delete(int typologyId){
+        return this.typologyService.deleteTypology(typologyId);
     }
 }

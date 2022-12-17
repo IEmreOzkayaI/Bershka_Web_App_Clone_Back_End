@@ -31,4 +31,8 @@ public class Stock {
 
     @Column(name = "count")
     private int count;
+
+    public void setStock(Stock stock){
+        this.count = stock.getCount();
+    }
 }

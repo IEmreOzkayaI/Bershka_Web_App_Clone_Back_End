@@ -22,15 +22,32 @@ public class CategoryManager implements CategoryService {
         this.categoryDao = categoryDao;
     }
 
+
+
+    @Override
+    public DataResult<List<Category>> getAll() {
+        return new SuccessDataResult<>(this.categoryDao.findAll(), "succes");
+    }
+
+    // FOR ADMIN
     @Override
     public Result add(Category category) {
         this.categoryDao.save(category);
         return new SuccessResult("Kategori eklendi");
     }
+    @Override
+    public Result updateCategory(int categoryId, Category category) {
+        Category updatedCategory = this.categoryDao.findById(categoryId).get();
+        updatedCategory.setCategory(category);
+        this.categoryDao.save(updatedCategory);
+        return new SuccessResult();
+    }
 
     @Override
-    public DataResult<List<Category>> getAll() {
-        return new SuccessDataResult<>(this.categoryDao.findAll(), "succes");
+    public Result deleteCategory(int categoryId) {
+        Category deletedCategory = this.categoryDao.findById(categoryId).get();
+        this.categoryDao.delete(deletedCategory);
+        return new SuccessResult();
     }
 
 

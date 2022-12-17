@@ -32,4 +32,8 @@ public class Category {
     @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Typology> typologies;
+
+    public void setCategory(Category category){
+        this.name = category.getName();
+    }
 }

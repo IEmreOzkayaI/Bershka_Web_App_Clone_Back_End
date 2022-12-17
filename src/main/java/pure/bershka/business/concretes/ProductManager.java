@@ -139,6 +139,7 @@ public class ProductManager implements ProductService {
 	public Result update(int productId, Product product){
 		Product updateProduct = this.productDao.findById(productId).get();
 		updateProduct.setProduct(product);
+		this.productDao.save(updateProduct);
 		return new SuccessResult();
 	}
 

@@ -37,4 +37,10 @@ public class Typology {
     @JsonIgnore
     @OneToMany(mappedBy = "typology", fetch = FetchType.LAZY)
     private List<Product> products;
+
+    public void setTypology(Typology typology){
+        this.name = typology.getName();
+        this.category = typology.getCategory();
+        this.gender = typology.getGender();
+    }
 }

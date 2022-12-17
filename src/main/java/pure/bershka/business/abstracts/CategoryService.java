@@ -9,4 +9,7 @@ import java.util.List;
 public interface CategoryService {
     Result add(Category category);
     DataResult<List<Category>> getAll();
+
+    Result updateCategory(int categoryId, Category category);
+    Result deleteCategory(int categoryId);
 }
