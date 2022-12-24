@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -23,7 +24,7 @@ public class Refund {
     private String cause;
 
     @Column(name = "refund_date")
-    private Date refundDate;
+    private LocalDateTime refundDate;
 
     @Column(name = "is_online")
     private boolean isOnline;
@@ -35,4 +36,12 @@ public class Refund {
     @OneToOne
     @JoinColumn(name = "order_detail_id")
     private OrderDetail orderDetail;
+
+    public Refund(String cause, LocalDateTime refundDate, boolean isOnline, Customer customer, OrderDetail orderDetail) {
+        this.cause = cause;
+        this.refundDate = refundDate;
+        this.isOnline = isOnline;
+        this.customer = customer;
+        this.orderDetail = orderDetail;
+    }
 }

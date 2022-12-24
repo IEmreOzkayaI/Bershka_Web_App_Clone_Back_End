@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Entity
 @Table(name="order_detail")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class OrderDetail {
 	@Id
 	@Column(name = "order_detail_id")
@@ -29,4 +33,15 @@ public class OrderDetail {
 
 	@Column(name = "amount")
 	private int amount;
+
+	@Column(name = "isRefunded")
+	private boolean isRefunded;
+
+	public OrderDetail(Order order, Product product, Size size, int amount, boolean isRefunded) {
+		this.order = order;
+		this.product = product;
+		this.size = size;
+		this.amount = amount;
+		this.isRefunded = isRefunded;
+	}
 }

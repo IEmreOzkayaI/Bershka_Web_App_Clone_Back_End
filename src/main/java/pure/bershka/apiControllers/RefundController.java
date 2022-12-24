@@ -35,4 +35,9 @@ public class RefundController {
     public Result deleteRefund(int refundId){
         return this.refundService.delete(refundId);
     }
+
+    @PostMapping("/request-refund") // Refund işlemi için bu kullanılır.
+    public Result requestRefund(String cause, int orderDetailId){
+        return this.refundService.startRefund(cause,orderDetailId);
+    }
 }

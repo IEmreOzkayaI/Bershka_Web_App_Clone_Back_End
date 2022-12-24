@@ -6,7 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,6 +27,10 @@ public class Customer extends User {
     @NotNull
     private int id;
 
+    @Column(name = "budget")
+    private int budget;
+
+
     @Column(name = "identity_number")
     @NotBlank
     private String identityNumber;
@@ -39,6 +45,7 @@ public class Customer extends User {
     @ManyToOne
     @JoinColumn(name = "last_location_id")
     @NotNull
+    @JsonBackReference
     private Location lastLocation;
 
     @JsonIgnore
@@ -49,19 +56,19 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Refund> refunds;
 
-    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="customer_locations", joinColumns = @JoinColumn(name = "customer_id"),
                                     inverseJoinColumns = @JoinColumn(name="location_id"))
     private List<Location> locations;
 
-    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="baskets", joinColumns = @JoinColumn(name = "customer_id"),
                                     inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> basket;
 
-    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="favorites", joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))

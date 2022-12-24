@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Order {
     private int totalPrice;
 
     @Column(name = "creation_date")
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -45,7 +46,6 @@ public class Order {
 
     @JsonIgnore
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-//    @JoinColumn(name = "order_detail_id")
     private List<OrderDetail> orderDetails;
 
     @JsonIgnore
@@ -56,6 +56,27 @@ public class Order {
     @OneToMany(mappedBy = "size", fetch = FetchType.LAZY)
     private List<OrderDetail> sizes;
 
+    public Order(int totalPrice, LocalDateTime creationDate, Customer customer,
+                 Location location, Location billingLocation, DiscountCode
+                         discountCode) {
+        this.totalPrice = totalPrice;
+        this.creationDate = creationDate;
+        this.customer = customer;
+        this.location = location;
+        this.billingLocation = billingLocation;
+        this.discountCode = discountCode;
+    }
+
+//    public Order(Date creationDate, int totalPrice,
+//                 int customerId, int locationId, int billingLocationId, int discountCodeId, List<OrderDetail> orderDetails,){
+//        this.creationDate = creationDate;
+//        this.totalPrice = totalPrice;
+//        this.billingLocation.setId(billingLocationId);
+//        this.customer.setId(customerId);
+//        this.discountCode.setId(discountCodeId);
+//        this.location.setId(locationId);
+//
+//    }
     public void setOrder(Order order){
         this.location = order.getLocation();
     }

@@ -35,4 +35,7 @@ public class Stock {
     public void setStock(Stock stock){
         this.count = stock.getCount();
     }
+    public void decreaseCount(int value){
+        this.count = this.getCount() - value;
+    }
 }

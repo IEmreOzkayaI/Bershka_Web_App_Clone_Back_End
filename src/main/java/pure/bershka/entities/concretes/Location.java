@@ -1,5 +1,6 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,13 +40,21 @@ public class Location {
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     private List<Order> orders;
 
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "lastLocation", fetch = FetchType.LAZY)
     private List<Customer> customersLastLocation;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(mappedBy = "locations", fetch = FetchType.LAZY)
     private List<Customer> customers;
+
+    public Location(String title, String address, String city, String town, String postCode) {
+        this.title = title;
+        this.address = address;
+        this.city = city;
+        this.town = town;
+        this.postCode = postCode;
+    }
 
     public void setLocation(Location location){
         this.title = location.getTitle();

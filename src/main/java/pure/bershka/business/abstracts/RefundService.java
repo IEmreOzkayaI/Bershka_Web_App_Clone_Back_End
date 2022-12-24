@@ -12,6 +12,7 @@ public interface RefundService {
 
     Result add(Refund refund);
     Result delete(int refundId);
+    Result startRefund(String cause, int orderDetailId);
 
     
 }

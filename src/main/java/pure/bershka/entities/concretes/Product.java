@@ -1,6 +1,7 @@
 package pure.bershka.entities.concretes;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -74,12 +75,12 @@ public class Product{
     @NotEmpty
     private List<Image> images;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(mappedBy = "basket", fetch = FetchType.LAZY)
     @NotEmpty
     private List<Customer> basketOfCustomers;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
     @NotEmpty
     private List<Customer> favoritesOfCustomers;

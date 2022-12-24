@@ -21,9 +21,9 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/give-order")
-    public Result giveOrder(@RequestBody Order order){
-        return this.orderService.giveOrder(order);
+    @PostMapping("/add-order")
+    public Result addOrder(@RequestBody Order order){
+        return this.orderService.addOrder(order);
     }
     @GetMapping("/get-all")
     public DataResult<List<Order>> getAll(){
@@ -36,5 +36,10 @@ public class OrderController {
     @PutMapping("/update")
     public Result update(int orderId, @RequestBody Order order){
         return this.orderService.updateOrder(orderId, order);
+    }
+    @PostMapping("/give-order")
+    public Result giveOrder(int customerId, int billLocationId, int locationId, @RequestParam
+                            List<Integer> sizeId,@RequestParam List<Integer> amount, int discountCodeId){
+        return this.orderService.giveOrder(customerId,billLocationId,locationId,sizeId,amount,discountCodeId);
     }
 }
