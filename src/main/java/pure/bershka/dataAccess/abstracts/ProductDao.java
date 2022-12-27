@@ -24,6 +24,9 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p JOIN p.typology t WHERE t.name = :typology")
     List<Product> getByFilterTypology(String typology);
 
+    @Query("SELECT p FROM Product p JOIN p.typology t WHERE t.name = :typology AND t.gender = :gender ")
+    List<Product> getByFilterTypologyAndGender(String typology,String gender);
+    
     @Query("SELECT p FROM Product p JOIN p.sizes s JOIN p.typology t WHERE t.name = :typology AND s.name = :size")
     List<Product> getByFilterTypologyAndSize(String typology, String size);
 

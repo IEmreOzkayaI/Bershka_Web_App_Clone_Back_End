@@ -13,6 +13,7 @@ public interface CustomerService {
 	DataResult<Customer> getCustomer(String email, String password);
 	Result updateCustomer(int customerId, Customer customer);
 	Result deleteCustomer(int customerId);
+	DataResult<Customer> getCustomerById(int id);
 
 
 }

@@ -24,12 +24,16 @@ public class CustomerController {
 	public Result signUp(@RequestBody CustomerDto customerDto) {
 		return this.customerService.signUp(customerDto);
 	}
+	
 
 	@GetMapping("/get-customer")
 	public DataResult<Customer> getCustomer(@RequestParam String email, @RequestParam String password){
 		return this.customerService.getCustomer(email, password);
 	}
-
+	@GetMapping("/get-customer-id")
+	public DataResult<Customer> getCustomerById(@RequestParam int id){
+		return this.customerService.getCustomerById(id);
+	}
 	@PutMapping("/update")
 	public Result update(int customerId, @RequestBody Customer customer){
 		return this.customerService.updateCustomer(customerId,customer);
@@ -40,8 +44,5 @@ public class CustomerController {
 	}
 
 
-//	@PostMapping("/sign-up")
-//	public Result signUp(@RequestBody Customer customer) {
-//		return this.customerService.signUp(customer);
-//	}
+
 }

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -20,6 +22,7 @@ public class Image {
 	@Column(name = "img_url")
 	private String url;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;

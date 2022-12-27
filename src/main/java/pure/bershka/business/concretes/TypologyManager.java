@@ -8,8 +8,10 @@ import pure.bershka.core.utilities.result.Result;
 import pure.bershka.core.utilities.result.SuccessDataResult;
 import pure.bershka.core.utilities.result.SuccessResult;
 import pure.bershka.dataAccess.abstracts.TypologyDao;
+import pure.bershka.entities.concretes.Gender;
 import pure.bershka.entities.concretes.Typology;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,6 +50,21 @@ public class TypologyManager implements TypologyService {
         this.TypologyDao.delete(deletedTypology);
         return new SuccessResult("true");
     }
+
+	@Override
+	public DataResult<List<Typology>> listCategoriesWithGender(int categoryId, String gender) {
+		if(gender.equalsIgnoreCase("ERKEK")) {
+			gender="MALE";
+		}else {
+			gender="FEMALE";
+
+		}
+		List<Typology> listUnisex =this.TypologyDao.getByCategory_IdAndGender(categoryId, "UNISEX");
+		List<Typology> listGender =this.TypologyDao.getByCategory_IdAndGender(categoryId, gender.toUpperCase());
+		List<Typology> newList = new ArrayList<Typology>(listUnisex);
+		newList.addAll(listGender);
+		return new SuccessDataResult<List<Typology>>(newList);
+	}
 
 
 }

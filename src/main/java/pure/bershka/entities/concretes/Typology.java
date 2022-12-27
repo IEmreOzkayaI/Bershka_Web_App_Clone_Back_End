@@ -1,6 +1,9 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -26,9 +29,9 @@ public class Typology {
     @Column(name = "typology_name")
     private String name;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private Gender gender;
+    private String gender;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")

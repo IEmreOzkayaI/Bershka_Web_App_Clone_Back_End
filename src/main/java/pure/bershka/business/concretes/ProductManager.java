@@ -10,6 +10,7 @@ import pure.bershka.dataAccess.abstracts.ProductDao;
 import pure.bershka.entities.concretes.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.List;
 
@@ -61,6 +62,21 @@ public class ProductManager implements ProductService {
 	@Override
 	public DataResult<List<Product>> getByFilterTypology(String typology) {
 		return new SuccessDataResult<>(this.productDao.getByFilterTypology(typology));
+	}
+	
+	@Override
+	public DataResult<List<Product>> getByFilterTypologyAndGender(String typology, String gender) {
+		if(gender.equalsIgnoreCase("ERKEK")) {
+			gender="MALE";
+		}else {
+			gender="FEMALE";
+
+		}
+		List<Product> listUnisex =this.productDao.getByFilterTypologyAndGender(typology, "UNISEX");
+		List<Product> listGender =this.productDao.getByFilterTypologyAndGender(typology, gender.toUpperCase());
+		List<Product> newList = new ArrayList<Product>(listUnisex);
+		newList.addAll(listGender);
+		return new SuccessDataResult<List<Product>>(newList);
 	}
 
 	@Override
@@ -149,4 +165,6 @@ public class ProductManager implements ProductService {
 		this.productDao.delete(product);
 		return new SuccessResult();
 	}
+
+
 }
