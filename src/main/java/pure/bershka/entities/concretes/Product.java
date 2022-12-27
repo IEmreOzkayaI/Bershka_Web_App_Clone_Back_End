@@ -4,7 +4,6 @@ package pure.bershka.entities.concretes;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -37,10 +36,9 @@ public class Product{
     @NotNull(message = "Product's price cannot be empty.")
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     @NotNull(message = "Gender must not be null!")
-    private Gender gender;
+    private String gender;
 
     @Column(name = "discount_percentage")
     @PositiveOrZero(message = "Negative value cannot be accepted for discount percentage!")
@@ -68,17 +66,8 @@ public class Product{
             inverseJoinColumns = @JoinColumn(name = "size_id"))
     private List<Size> sizes;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Image> images;
-
-    @JsonBackReference
-    @ManyToMany(mappedBy = "basket", fetch = FetchType.LAZY)
-    private List<Customer> basketOfCustomers;
-
-    @JsonBackReference
-    @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
-    private List<Customer> favoritesOfCustomers;
 
     public void setProduct(Product product){
         this.name = product.getName();

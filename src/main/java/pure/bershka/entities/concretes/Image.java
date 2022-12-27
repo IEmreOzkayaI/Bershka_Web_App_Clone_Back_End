@@ -1,5 +1,7 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,8 +27,8 @@ public class Image {
 	@NotBlank(message = "Image url cannot be empty.")
 	private String url;
 
-	@JsonBackReference
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "product_id")
 	@NotNull(message = "Image must be belong to only 1 product.")
 	private Product product;

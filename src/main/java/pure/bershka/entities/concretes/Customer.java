@@ -48,30 +48,24 @@ public class Customer extends User {
     @ManyToOne
     @JoinColumn(name = "last_location_id")
     @NotNull
-    @JsonBackReference
     private Location lastLocation;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<Order> order;
-
+    private List<Order> orders;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Refund> refunds;
 
-    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="customer_locations", joinColumns = @JoinColumn(name = "customer_id"),
                                     inverseJoinColumns = @JoinColumn(name="location_id"))
     private List<Location> locations;
 
-    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="baskets", joinColumns = @JoinColumn(name = "customer_id"),
-                                    inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> basket;
+                                    inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<Item> basket;
 
-    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="favorites", joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))

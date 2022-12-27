@@ -36,9 +36,8 @@ public class Typology {
     @NotNull(message = "Gender must not be null!")
     private String gender;
 
-
-
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "category_id")
     @NotNull(message = "Category id must be given.")
     private Category category;

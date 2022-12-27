@@ -1,5 +1,8 @@
 package pure.bershka.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +37,7 @@ public class Refund {
     private boolean isOnline;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id")
     @NotNull(message = "Customer must be given.")
     private Customer customer;

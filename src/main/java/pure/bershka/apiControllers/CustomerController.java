@@ -60,8 +60,8 @@ public class CustomerController {
 		return this.customerService.removeBasket(customerId,productId);
 	}
 	@PostMapping("/add-basket")
-	public Result addToBasket(int customerId, int productId){
-		return this.customerService.addBasket(customerId,productId);
+	public Result addToBasket(int customerId, int productId, int sizeId, int amount){
+		return this.customerService.addBasket(customerId,productId,sizeId,amount);
 	}
 	@PutMapping("/add-location")
 	public Result addLocation(int customerId,String title, String address, String city, String town, String postCode){

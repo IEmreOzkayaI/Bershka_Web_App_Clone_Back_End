@@ -1,7 +1,9 @@
 package pure.bershka.entities.concretes;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +37,7 @@ public class Order {
     private LocalDateTime creationDate;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id")
     @NotNull(message = "Customer must be given.")
     private Customer customer;
@@ -54,7 +57,6 @@ public class Order {
     @NotNull(message = "Discount code cannot be empty.")
     private DiscountCode discountCode;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails;
 

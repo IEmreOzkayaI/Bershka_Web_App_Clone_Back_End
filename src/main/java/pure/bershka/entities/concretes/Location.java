@@ -2,6 +2,7 @@ package pure.bershka.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,9 +35,6 @@ public class Location {
     @NotBlank(message = "City cannot be empty.")
     private String city;
 
-    @Column(name = "town")
-    private String town;
-
     @Column(name = "post_code")
     @NotBlank(message = "Post code cannot be empty.")
     private String postCode;
@@ -45,11 +43,15 @@ public class Location {
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     private List<Order> orders;
 
-    @JsonBackReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "billingLocation", fetch = FetchType.LAZY)
+    private List<Order> billingLocations;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "lastLocation", fetch = FetchType.LAZY)
     private List<Customer> customersLastLocation;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(mappedBy = "locations", fetch = FetchType.LAZY)
     private List<Customer> customers;
 
@@ -57,7 +59,6 @@ public class Location {
         this.title = title;
         this.address = address;
         this.city = city;
-        this.town = town;
         this.postCode = postCode;
     }
 
@@ -65,7 +66,6 @@ public class Location {
         this.title = location.getTitle();
         this.city = location.getCity();
         this.address = location.getAddress();
-        this.town = location.getTown();
         this.postCode = location.getPostCode();
     }
 

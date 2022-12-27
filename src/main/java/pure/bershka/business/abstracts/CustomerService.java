@@ -15,7 +15,7 @@ public interface CustomerService {
 	Result deleteCustomer(int customerId);
 	Result removeFavorites(int customerId, int productId);
 	Result addFavorite(int customerId, int productId);
-	Result addBasket(int customerId, int productId);
+	Result addBasket(int customerId, int productId, int sizeId, int amount);
 	Result removeBasket(int customerId, int productId);
 	Result addLocation(int customerId,String title, String address, String city, String town, String postCode);
 	DataResult<Customer> getCustomerById(int id);

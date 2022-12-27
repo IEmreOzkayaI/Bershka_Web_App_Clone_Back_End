@@ -6,6 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 @Data
@@ -22,6 +25,7 @@ public class OrderDetail {
 	private int id;
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "order_id")
 	@NotNull(message = "Order id must be given.")
 	private Order order;

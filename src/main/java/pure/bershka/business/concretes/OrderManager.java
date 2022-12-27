@@ -75,14 +75,14 @@ public class OrderManager implements OrderService {
         DiscountCode discountCode = this.discountCodeDao.findById(discountCodeId).get();
         int totalPrice = 0;
         for (int i = 0; i < whoBuys.getBasket().size(); i++) {
-            if (whoBuys.getBasket().get(i).getDiscountPercentage().intValue() != 0){
-                int discount = whoBuys.getBasket().get(i).getPrice().intValue() *
-                        whoBuys.getBasket().get(i).getDiscountPercentage().intValue() / 100;
-                int newPrice = whoBuys.getBasket().get(i).getPrice().intValue() - discount;
+            if (whoBuys.getBasket().get(i).getProduct().getDiscountPercentage().intValue() != 0){
+                int discount = whoBuys.getBasket().get(i).getProduct().getPrice().intValue() *
+                        whoBuys.getBasket().get(i).getProduct().getDiscountPercentage().intValue() / 100;
+                int newPrice = whoBuys.getBasket().get(i).getProduct().getPrice().intValue() - discount;
                 totalPrice += newPrice * amount.get(i);
             }
             else
-                totalPrice += whoBuys.getBasket().get(i).getPrice().intValue()*amount.get(i);
+                totalPrice += whoBuys.getBasket().get(i).getProduct().getPrice().intValue()*amount.get(i);
         }
         if (totalPrice <= whoBuys.getBudget()){
             for (int i = 0; i < whoBuys.getBasket().size(); i++) {
@@ -105,7 +105,7 @@ public class OrderManager implements OrderService {
         this.orderDao.save(order);
 
         for (int i = 0; i < whoBuys.getBasket().size(); i++) {
-            OrderDetail orderDetail = new OrderDetail(order,whoBuys.getBasket().get(i),
+            OrderDetail orderDetail = new OrderDetail(order,whoBuys.getBasket().get(i).getProduct(),
                     this.sizeDao.findById(sizeId.get(i)).get(),amount.get(i),false);
             this.orderDetailDao.save(orderDetail);
         }

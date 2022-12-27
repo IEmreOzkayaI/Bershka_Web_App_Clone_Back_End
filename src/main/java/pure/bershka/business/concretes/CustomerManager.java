@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import pure.bershka.business.abstracts.CustomerService;
 import pure.bershka.core.utilities.result.*;
-import pure.bershka.dataAccess.abstracts.CustomerDao;
+import pure.bershka.dataAccess.abstracts.*;
 import pure.bershka.entities.concretes.Customer;
+import pure.bershka.entities.concretes.Item;
+import pure.bershka.entities.concretes.Location;
+import pure.bershka.entities.concretes.Product;
 import pure.bershka.entities.dtos.CustomerDto;
 
 @Service
@@ -18,6 +21,8 @@ public class CustomerManager implements CustomerService {
 	private StockDao stockDao;
 	private ProductDao productDao;
 	private LocationDao locationDao;
+
+	private SizeDao sizeDao;
 
 	@Autowired
 	public CustomerManager(CustomerDao customerDao, StockDao stockDao, ProductDao productDao,LocationDao locationDao) {
@@ -39,7 +44,6 @@ public class CustomerManager implements CustomerService {
 			location.setCity(customerDto.getCity());
 			location.setPostCode(customerDto.getPostalCode());
 			location.setTitle(customerDto.getAddressTitle());
-			location.setTown(customerDto.getTown());
 			location.setId(0);
 			this.locationDao.save(location);
 
@@ -114,10 +118,10 @@ public class CustomerManager implements CustomerService {
 	}
 
 	@Override
-	public Result addBasket(int customerId, int productId) {
+	public Result addBasket(int customerId, int productId, int sizeId, int amount) {
 		Customer toAddBasket = this.customerDao.findById(customerId).get();
-		Product product = this.productDao.findById(productId).get();
-		toAddBasket.getBasket().add(product);
+		Item item = new Item(0,this.productDao.findById(productId).get(),this.sizeDao.findById(sizeId).get(), amount);
+		toAddBasket.getBasket().add(item);
 		this.customerDao.save(toAddBasket);
 		return new SuccessResult("Ürün sepete eklendi.");
 	}
