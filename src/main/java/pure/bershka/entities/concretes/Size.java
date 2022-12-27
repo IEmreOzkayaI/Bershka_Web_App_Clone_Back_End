@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,7 @@ public class Size {
 	private int id;
 
 	@Column(name = "size_name")
+	@NotBlank(message = "Size name cannot be empty.")
 	private String name;
 
 	@JsonIgnore

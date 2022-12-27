@@ -1,5 +1,6 @@
 package pure.bershka.business.concretes;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class CustomerManager implements CustomerService {
 		}else {
 			Customer customer = new Customer();
 			customer.setActive(false);
-			customer.setAddDate(new Date());
+			customer.setAddDate(LocalDateTime.now());
 			customer.setEmail(customerDto.getEmail());
 			customer.setFirstName(customerDto.getFirstName());
 			customer.setLastName(customerDto.getLastName());

@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -23,25 +26,32 @@ public class Order {
     private int id;
 
     @Column(name = "total_price")
+    @NotNull(message = "Total order price cannot be empty.")
+    @Min(value = 0,message = "Total order price cannot be 0.")
     private int totalPrice;
 
     @Column(name = "creation_date")
+    @NotNull(message = "Creation date cannot be empty.")
     private LocalDateTime creationDate;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @NotNull(message = "Customer must be given.")
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
+    @NotNull(message = "Location cannot be empty.")
     private Location location;
 
     @ManyToOne
     @JoinColumn(name = "billing_location_id")
+    @NotNull(message = "Billing Location cannot be empty.")
     private Location billingLocation;
 
     @ManyToOne
     @JoinColumn(name = "discount_code_id")
+    @NotNull(message = "Discount code cannot be empty.")
     private DiscountCode discountCode;
 
     @JsonIgnore

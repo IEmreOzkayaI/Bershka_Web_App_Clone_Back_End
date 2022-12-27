@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -24,17 +26,21 @@ public class Refund {
     private String cause;
 
     @Column(name = "refund_date")
+    @NotNull(message = "Refund date must be declared.")
     private LocalDateTime refundDate;
 
     @Column(name = "is_online")
+    @NotNull(message = "Must be declared as default 'true'.")
     private boolean isOnline;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @NotNull(message = "Customer must be given.")
     private Customer customer;
 
     @OneToOne
     @JoinColumn(name = "order_detail_id")
+    @NotNull(message = "Detail of the ordered product must be given.")
     private OrderDetail orderDetail;
 
     public Refund(String cause, LocalDateTime refundDate, boolean isOnline, Customer customer, OrderDetail orderDetail) {

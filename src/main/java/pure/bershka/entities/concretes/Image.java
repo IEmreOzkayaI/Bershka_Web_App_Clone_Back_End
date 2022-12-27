@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -18,10 +20,12 @@ public class Image {
 	private int id;
 
 	@Column(name = "img_url")
+	@NotBlank(message = "Image url cannot be empty.")
 	private String url;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")
+	@NotNull(message = "Image must be belong to only 1 product.")
 	private Product product;
 
 	public void setImage(Image image){

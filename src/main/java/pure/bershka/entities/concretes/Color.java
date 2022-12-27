@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,6 +25,7 @@ public class Color {
     private int id;
 
     @Column(name = "color_name")
+    @NotBlank(message = "Color name cannot be empty!")
     private String name;
 
     @JsonIgnore
