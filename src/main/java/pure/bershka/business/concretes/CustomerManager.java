@@ -2,6 +2,7 @@ package pure.bershka.business.concretes;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +10,7 @@ import org.springframework.stereotype.Service;
 import pure.bershka.business.abstracts.CustomerService;
 import pure.bershka.core.utilities.result.*;
 import pure.bershka.dataAccess.abstracts.*;
-import pure.bershka.entities.concretes.Customer;
-import pure.bershka.entities.concretes.Item;
-import pure.bershka.entities.concretes.Location;
-import pure.bershka.entities.concretes.Product;
+import pure.bershka.entities.concretes.*;
 import pure.bershka.entities.dtos.CustomerDto;
 
 @Service
@@ -23,13 +21,18 @@ public class CustomerManager implements CustomerService {
 	private LocationDao locationDao;
 
 	private SizeDao sizeDao;
+	private ItemDao itemDao;
 
 	@Autowired
-	public CustomerManager(CustomerDao customerDao, StockDao stockDao, ProductDao productDao,LocationDao locationDao) {
+	public CustomerManager(CustomerDao customerDao, StockDao stockDao,
+						   ProductDao productDao,LocationDao locationDao,
+						   SizeDao sizeDao, ItemDao itemDao) {
 		this.customerDao=customerDao;
 		this.stockDao = stockDao;
 		this.productDao = productDao;
 		this.locationDao = locationDao;
+		this.sizeDao = sizeDao;
+		this.itemDao = itemDao;
 	}
 
 	@Override
@@ -93,6 +96,36 @@ public class CustomerManager implements CustomerService {
 	}
 
 	@Override
+	public DataResult<List<Item>> getBasket(int customerId) {
+		Customer customer = this.customerDao.findById(customerId).get();
+		return new SuccessDataResult<>(customer.getBasket());
+	}
+
+	@Override
+	public DataResult<List<Product>> getFavorite(int customerId) {
+		Customer customer = this.customerDao.findById(customerId).get();
+		return new SuccessDataResult<>(customer.getFavorites());
+	}
+
+	@Override
+	public DataResult<List<Location>> getLocation(int customerId) {
+		Customer customer = this.customerDao.findById(customerId).get();
+		return new SuccessDataResult<>(customer.getLocations());
+	}
+
+	@Override
+	public DataResult<List<Refund>> getRefund(int customerId) {
+		Customer customer = this.customerDao.findById(customerId).get();
+		return new SuccessDataResult<>(customer.getRefunds());
+	}
+
+	@Override
+	public DataResult<List<Order>> getOrder(int customerId) {
+		Customer customer = this.customerDao.findById(customerId).get();
+		return new SuccessDataResult<>(customer.getOrders());
+	}
+
+	@Override
 	public Result removeFavorites(int customerId, int productId) {
 		Customer removeFromFavorite = this.customerDao.findById(customerId).get();
 		if (removeFromFavorite.getFavorites().size() != 0){
@@ -120,20 +153,39 @@ public class CustomerManager implements CustomerService {
 	@Override
 	public Result addBasket(int customerId, int productId, int sizeId, int amount) {
 		Customer toAddBasket = this.customerDao.findById(customerId).get();
-		Item item = new Item(0,this.productDao.findById(productId).get(),this.sizeDao.findById(sizeId).get(), amount);
+		Product product = this.productDao.findById(productId).get();
+		Size size = this.sizeDao.findById(sizeId).get();
+		boolean flag =false;
+		if (toAddBasket.getBasket().size() != 0){
+			for (int i = 0; i < toAddBasket.getBasket().size(); i++) {
+				if (toAddBasket.getBasket().get(i).getProduct().getId() == productId &&
+						toAddBasket.getBasket().get(i).getSize().getId() == sizeId){
+					int previousAmount = toAddBasket.getBasket().get(i).getAmount();
+					toAddBasket.getBasket().get(i).setAmount(previousAmount + amount);
+					this.customerDao.save(toAddBasket);
+					return new SuccessResult("Ürün sepete eklendi.");
+				}
+			}
+		}
+		Item item = new Item(product,size, amount);
 		toAddBasket.getBasket().add(item);
+		this.itemDao.save(item);
 		this.customerDao.save(toAddBasket);
 		return new SuccessResult("Ürün sepete eklendi.");
+
 	}
 
 	@Override
-	public Result removeBasket(int customerId, int productId) {
+	public Result removeBasket(int customerId, int productId,int sizeId) {
 		Customer removeFromBasket = this.customerDao.findById(customerId).get();
 		if (removeFromBasket.getBasket().size()!=0){
 			for (int i = 0; i < removeFromBasket.getBasket().size(); i++) {
-				if(removeFromBasket.getBasket().get(i).getId() == productId){
+				if(removeFromBasket.getBasket().get(i).getProduct().getId() == productId &&
+						removeFromBasket.getBasket().get(i).getSize().getId() == sizeId){
 					removeFromBasket.getBasket().remove(i);
+					Item itemToDelete = this.itemDao.getItemByProductIdAndSizeId(productId,sizeId);
 					this.customerDao.save(removeFromBasket);
+					this.itemDao.delete(itemToDelete);
 					return new SuccessResult("Ürün sepetten çıkarıldı.");
 				}
 			}

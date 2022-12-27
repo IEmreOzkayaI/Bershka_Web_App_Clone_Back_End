@@ -26,7 +26,7 @@ public class Refund {
 
     @Lob
     @Column(name = "cause")
-    private String cause;
+    private String cause;       // bu eleman getRefunds kısmında hata verdiriyor.
 
     @Column(name = "refund_date")
     @NotNull(message = "Refund date must be declared.")

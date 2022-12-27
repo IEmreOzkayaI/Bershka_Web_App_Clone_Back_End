@@ -67,31 +67,37 @@ public class OrderManager implements OrderService {
     }
 
     @Override
-    public Result giveOrder(int customerId, int billLocationId, int locationId,
-                             List<Integer> sizeId,List<Integer> amount, int discountCodeId) {
+    public Result giveOrder(int customerId, int billLocationId, int locationId, int discountCodeId) {
         Customer whoBuys = this.customerDao.findById(customerId).get();
         Location location = this.locationDao.findById(locationId).get();
         Location billLocation = this.locationDao.findById(billLocationId).get();
-        DiscountCode discountCode = this.discountCodeDao.findById(discountCodeId).get();
+        DiscountCode discountCode = this.discountCodeDao.findById(discountCodeId).get(); // default sıfır indirim için id = 101
         int totalPrice = 0;
         for (int i = 0; i < whoBuys.getBasket().size(); i++) {
             if (whoBuys.getBasket().get(i).getProduct().getDiscountPercentage().intValue() != 0){
                 int discount = whoBuys.getBasket().get(i).getProduct().getPrice().intValue() *
                         whoBuys.getBasket().get(i).getProduct().getDiscountPercentage().intValue() / 100;
                 int newPrice = whoBuys.getBasket().get(i).getProduct().getPrice().intValue() - discount;
-                totalPrice += newPrice * amount.get(i);
+                totalPrice += newPrice * whoBuys.getBasket().get(i).getAmount();
             }
             else
-                totalPrice += whoBuys.getBasket().get(i).getProduct().getPrice().intValue()*amount.get(i);
+                totalPrice += whoBuys.getBasket().get(i).getProduct().getPrice().intValue()
+                        *whoBuys.getBasket().get(i).getAmount();
         }
         if (totalPrice <= whoBuys.getBudget()){
             for (int i = 0; i < whoBuys.getBasket().size(); i++) {
-                if (this.stockDao.getProduct(whoBuys.getBasket().get(i).getId(), sizeId.get(i)).getCount() == 0)
-                    return new ErrorResult("There is no enough stock for this item!!");
+                if ((this.stockDao.getProduct(whoBuys.getBasket().get(i).getProduct().getId(),
+                        whoBuys.getBasket().get(i).getSize().getId()).getCount() == 0) ||
+                        (this.stockDao.getProduct(whoBuys.getBasket().get(i).getProduct().getId(),
+                        whoBuys.getBasket().get(i).getSize().getId()).getCount()-whoBuys.getBasket().get(i).getAmount() < 0))
+                    return new ErrorResult("There is no enough stock for '"+
+                            whoBuys.getBasket().get(i).getProduct().getName() + "' named item!!");
             }
             for (int i = 0; i < whoBuys.getBasket().size(); i++) {
-                this.stockDao.getProduct(whoBuys.getBasket().get(i).getId(), sizeId.get(i)).decreaseCount(amount.get(i));
-                this.stockDao.save(this.stockDao.getProduct(whoBuys.getBasket().get(i).getId(), sizeId.get(i)));
+                this.stockDao.getProduct(whoBuys.getBasket().get(i).getProduct().getId(),
+                        whoBuys.getBasket().get(i).getSize().getId()).decreaseCount(whoBuys.getBasket().get(i).getAmount());
+                this.stockDao.save(this.stockDao.getProduct(whoBuys.getBasket().get(i).getProduct().getId(),
+                        whoBuys.getBasket().get(i).getSize().getId()));
             }
         }
         else
@@ -106,7 +112,7 @@ public class OrderManager implements OrderService {
 
         for (int i = 0; i < whoBuys.getBasket().size(); i++) {
             OrderDetail orderDetail = new OrderDetail(order,whoBuys.getBasket().get(i).getProduct(),
-                    this.sizeDao.findById(sizeId.get(i)).get(),amount.get(i),false);
+                    this.sizeDao.findById(whoBuys.getBasket().get(i).getSize().getId()).get(),whoBuys.getBasket().get(i).getAmount(),false);
             this.orderDetailDao.save(orderDetail);
         }
         this.addOrder(order);

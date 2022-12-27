@@ -38,8 +38,7 @@ public class OrderController {
         return this.orderService.updateOrder(orderId, order);
     }
     @PostMapping("/give-order")
-    public Result giveOrder(int customerId, int billLocationId, int locationId, @RequestParam
-                            List<Integer> sizeId,@RequestParam List<Integer> amount, int discountCodeId){
-        return this.orderService.giveOrder(customerId,billLocationId,locationId,sizeId,amount,discountCodeId);
+    public Result giveOrder(int customerId, int billLocationId, int locationId, int discountCodeId){
+        return this.orderService.giveOrder(customerId,billLocationId,locationId,discountCodeId);
     }
 }

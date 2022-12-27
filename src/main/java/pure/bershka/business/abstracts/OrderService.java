@@ -15,6 +15,5 @@ public interface OrderService {
     Result deleteOrder(int orderId);
     Result updateOrder(int orderId, Order order);
     Result addOrder(Order order);
-    Result giveOrder(int customerId, int billLocationId, int locationId,
-                     List<Integer> sizeId,List<Integer> amount, int discountCode);
+    Result giveOrder(int customerId, int billLocationId, int locationId, int discountCodeId);
 }

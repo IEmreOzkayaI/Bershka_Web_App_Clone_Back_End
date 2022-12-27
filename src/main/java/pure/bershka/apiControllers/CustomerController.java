@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import pure.bershka.business.abstracts.CustomerService;
 import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.Result;
-import pure.bershka.entities.concretes.Customer;
+import pure.bershka.entities.concretes.*;
 import pure.bershka.entities.dtos.CustomerDto;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -29,11 +31,11 @@ public class CustomerController {
 	
 
 	@GetMapping("/get-customer")
-	public DataResult<Customer> getCustomer(@RequestParam String email, @RequestParam String password){
+	public DataResult<Customer> getCustomer(String email, String password){
 		return this.customerService.getCustomer(email, password);
 	}
 	@GetMapping("/get-customer-id")
-	public DataResult<Customer> getCustomerById(@RequestParam int id){
+	public DataResult<Customer> getCustomerById(int id){
 		return this.customerService.getCustomerById(id);
 	}
 	@PutMapping("/update")
@@ -56,8 +58,8 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/delete-basket")
-	public Result deleteFromBasket(int customerId, int productId){
-		return this.customerService.removeBasket(customerId,productId);
+	public Result deleteFromBasket(int customerId, int productId,int sizeId){
+		return this.customerService.removeBasket(customerId,productId,sizeId);
 	}
 	@PostMapping("/add-basket")
 	public Result addToBasket(int customerId, int productId, int sizeId, int amount){
@@ -67,8 +69,22 @@ public class CustomerController {
 	public Result addLocation(int customerId,String title, String address, String city, String town, String postCode){
 		return this.customerService.addLocation(customerId,title,address,city,town,postCode);
 	}
-
-
+	@GetMapping("/get-baskets")
+	public DataResult<List<Item>> getBasket(int customerId){
+		return this.customerService.getBasket(customerId);
+	}@GetMapping("/get-favorites")
+	public DataResult<List<Product>> getFavorite(int customerId){
+		return this.customerService.getFavorite(customerId);
+	}@GetMapping("/get-orders")
+	public DataResult<List<Order>> getOrder(int customerId){
+		return this.customerService.getOrder(customerId);
+	}@GetMapping("/get-locations")
+	public DataResult<List<Location>> getLocation(int customerId){
+		return this.customerService.getLocation(customerId);
+	}@GetMapping("/get-refunds")
+	public DataResult<List<Refund>> getRefund(int customerId){
+		return this.customerService.getRefund(customerId);
+	}
 
 
 }

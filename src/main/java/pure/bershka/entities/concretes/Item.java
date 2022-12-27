@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="items")
+@Getter
+@Setter
 public class Item {
     @Id
     @Column(name = "item_id")
@@ -38,4 +40,9 @@ public class Item {
     @NotNull(message = "Amount for a product cannot be empty.")
     private int amount;
 
+    public Item(Product product, Size size, int amount) {
+        this.product = product;
+        this.size = size;
+        this.amount = amount;
+    }
 }
