@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -24,6 +25,7 @@ public class Category {
     private int id;
 
     @Column(name = "category_name")
+    @NotBlank(message = "Category name cannot be empty!")
     private String name;
 
     @JsonIgnore

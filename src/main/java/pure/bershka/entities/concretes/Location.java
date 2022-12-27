@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -22,18 +23,22 @@ public class Location {
     private int id;
 
     @Column(name = "location_title")
+    @NotBlank(message = "Title cannot be empty.")
     private String title;
 
     @Column(name = "address")
+    @NotBlank(message = "Address cannot be empty.")
     private String address;
 
     @Column(name = "city")
+    @NotBlank(message = "City cannot be empty.")
     private String city;
 
     @Column(name = "town")
     private String town;
 
     @Column(name = "post_code")
+    @NotBlank(message = "Post code cannot be empty.")
     private String postCode;
 
     @JsonIgnore

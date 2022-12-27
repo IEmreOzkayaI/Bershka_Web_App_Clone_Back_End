@@ -113,6 +113,7 @@ public class OrderManager implements OrderService {
         int newBudget = whoBuys.getBudget()-totalPrice;
         whoBuys.setBudget(newBudget);
         whoBuys.setBasket(null);
+        whoBuys.setLastLocation(location);
         this.customerDao.save(whoBuys);
 
         return new SuccessResult("Buying successfull");

@@ -27,43 +27,39 @@ public class Product{
     @Id
     @Column(name="product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private int id;
 
     @Column(name = "name")
-    @NotBlank
+    @NotBlank(message = "Product's name cannot be empty.")
     private String name;
 
     @Column(name = "price")
+    @NotNull(message = "Product's price cannot be empty.")
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    @NotNull
+    @NotNull(message = "Gender must not be null!")
     private Gender gender;
 
     @Column(name = "discount_percentage")
-    @Min(0)
-    @Max(100)
+    @PositiveOrZero(message = "Negative value cannot be accepted for discount percentage!")
     private BigDecimal discountPercentage;
 
     @ManyToOne
     @JoinColumn(name="category_id")
-    @NotNull
+    @NotNull(message = "Category must be declared!")
     private Category category;
 
     @ManyToOne
     @JoinColumn(name="color_id")
-    @NotNull
+    @NotNull(message = "Color must be declared!")
     private Color color;
 
-/*    @ManyToOne
-    @JoinColumn(name="material_id")
-    private Material material;*/
 
     @ManyToOne
     @JoinColumn(name = "typology_id")
-    @NotNull
+    @NotNull(message = "Typology must be declared!")
     private Typology typology;
 
     @JsonIgnore
@@ -74,17 +70,14 @@ public class Product{
 
     @JsonManagedReference
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @NotEmpty
     private List<Image> images;
 
     @JsonBackReference
     @ManyToMany(mappedBy = "basket", fetch = FetchType.LAZY)
-    @NotEmpty
     private List<Customer> basketOfCustomers;
 
     @JsonBackReference
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
-    @NotEmpty
     private List<Customer> favoritesOfCustomers;
 
     public void setProduct(Product product){

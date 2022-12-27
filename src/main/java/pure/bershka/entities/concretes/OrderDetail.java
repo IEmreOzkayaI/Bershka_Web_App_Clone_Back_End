@@ -3,6 +3,8 @@ package pure.bershka.entities.concretes;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import lombok.*;
 
@@ -21,20 +23,26 @@ public class OrderDetail {
 
 	@ManyToOne
 	@JoinColumn(name = "order_id")
+	@NotNull(message = "Order id must be given.")
 	private Order order;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")
+	@NotNull(message = "Product id must be given.")
 	private Product product;
 
 	@ManyToOne
 	@JoinColumn(name = "size_id")
+	@NotNull(message = "Size id must be given.")
 	private Size size;
 
 	@Column(name = "amount")
+	@NotNull(message = "Amount of this related product to buy must be given.")
+	@Min(value = 1,message = "Minimum amount must be 1.")
 	private int amount;
 
 	@Column(name = "isRefunded")
+	@NotNull(message = "To check this product's refund status, it should be given false default.")
 	private boolean isRefunded;
 
 	public OrderDetail(Order order, Product product, Size size, int amount, boolean isRefunded) {

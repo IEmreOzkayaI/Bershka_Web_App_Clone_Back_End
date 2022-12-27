@@ -3,8 +3,8 @@ package pure.bershka.entities.concretes;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,19 +24,22 @@ public class Customer extends User {
     @Id
     @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private int id;
 
     @Column(name = "budget")
+    @NotNull
+    @Min(value = 0, message = "Budget must be minimum 0!")
     private int budget;
-
 
     @Column(name = "identity_number")
     @NotBlank
+    @Size(min = 10, max = 11,message = "Identity number must be minimum 10, maximum 11 length!")
+    @Pattern(regexp = "^[0-9-]*$",message = "Identity number must contain only numbers!")
     private String identityNumber;
 
     @Column(name = "phone_number")
     @NotNull
+    @Pattern(regexp = "^[0-9]*$",message = "Phone number must contain only numbers and '-' symbol!")
     private String phoneNumber;
     
     @Column(name = "is_active")

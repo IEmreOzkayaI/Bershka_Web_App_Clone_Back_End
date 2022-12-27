@@ -9,6 +9,8 @@ import lombok.Setter;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -23,13 +25,17 @@ public class Stock {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @NotNull(message = "Product id must be declared.")
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "size_id")
+    @NotNull(message = "Size id must be declared.")
     private Size size;
 
     @Column(name = "count")
+    @Min(value = 0,message = "Mininum stock amount for a product can be 0.")
+    @NotNull(message = "Amount for a product cannot be empty.")
     private int count;
 
     public void setStock(Stock stock){
