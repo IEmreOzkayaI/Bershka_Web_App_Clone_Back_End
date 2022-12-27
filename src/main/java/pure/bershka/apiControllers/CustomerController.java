@@ -33,7 +33,7 @@ public class CustomerController {
 		return this.customerService.getCustomer(email, password);
 	}
 	@GetMapping("/get-customer-id")
-	public DataResult<Customer> getCustomerById(@RequestParam int id){
+	public DataResult<Customer> getCustomerById(int id){
 		return this.customerService.getCustomerById(id);
 	}
 	@PutMapping("/update")
