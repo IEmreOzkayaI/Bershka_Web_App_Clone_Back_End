@@ -34,7 +34,7 @@ public class Item {
     private Size size;
 
     @Column(name = "amount")
-    @Min(value = 0,message = "Mininum stock amount for a product can be 0.")
+    @Min(value = 0,message = "Mininum choosen amount for a product can be 0.")
     @NotNull(message = "Amount for a product cannot be empty.")
     private int amount;
 
