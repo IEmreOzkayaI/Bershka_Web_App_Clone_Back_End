@@ -24,7 +24,6 @@ public class Refund {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Lob
     @Column(name = "cause")
     private String cause;       // bu eleman getRefunds kısmında hata verdiriyor.
 
