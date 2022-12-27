@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pure.bershka.business.abstracts.TypologyService;
 import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.Result;
+import pure.bershka.entities.concretes.Gender;
 import pure.bershka.entities.concretes.Typology;
 
 import java.util.List;
@@ -24,7 +25,10 @@ public class TypologyController {
     public DataResult<List<Typology>> listTypologies(int categoryId){
         return this.typologyService.listCategories(categoryId);
     }
-
+    @GetMapping("/list-typologies-gender")
+    public DataResult<List<Typology>> listTypologiesGender(int categoryId,String gender){
+        return this.typologyService.listCategoriesWithGender(categoryId, gender);
+    }
    @PostMapping("/add")
     public Result add(@RequestBody Typology typology){
         return this.typologyService.addTypology(typology);

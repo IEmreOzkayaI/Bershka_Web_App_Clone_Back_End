@@ -8,12 +8,7 @@ import org.springframework.stereotype.Service;
 import pure.bershka.business.abstracts.CustomerService;
 import pure.bershka.core.utilities.result.*;
 import pure.bershka.dataAccess.abstracts.CustomerDao;
-import pure.bershka.dataAccess.abstracts.LocationDao;
-import pure.bershka.dataAccess.abstracts.ProductDao;
-import pure.bershka.dataAccess.abstracts.StockDao;
 import pure.bershka.entities.concretes.Customer;
-import pure.bershka.entities.concretes.Location;
-import pure.bershka.entities.concretes.Product;
 import pure.bershka.entities.dtos.CustomerDto;
 
 @Service
@@ -22,7 +17,7 @@ public class CustomerManager implements CustomerService {
 	private StockDao stockDao;
 	private ProductDao productDao;
 	private LocationDao locationDao;
-	
+
 	@Autowired
 	public CustomerManager(CustomerDao customerDao, StockDao stockDao, ProductDao productDao,LocationDao locationDao) {
 		this.customerDao=customerDao;
@@ -33,10 +28,20 @@ public class CustomerManager implements CustomerService {
 
 	@Override
 	public Result signUp(CustomerDto customerDto) {
-	
-		if(customerDto.getEmail().equalsIgnoreCase("string")) {
-			return new ErrorResult("Kullanıcı Boş");
-		}else {
+
+		if (this.customerDao.findByEmail(customerDto.getEmail()) != null) {
+			return new ErrorResult("Kullanıcı Mevcut");
+		} else {
+
+			Location location = new Location();
+			location.setAddress(customerDto.getAddress());
+			location.setCity(customerDto.getCity());
+			location.setPostCode(customerDto.getPostalCode());
+			location.setTitle(customerDto.getAddressTitle());
+			location.setTown(customerDto.getTown());
+			location.setId(0);
+			this.locationDao.save(location);
+
 			Customer customer = new Customer();
 			customer.setActive(false);
 			customer.setAddDate(new Date());
@@ -74,6 +79,12 @@ public class CustomerManager implements CustomerService {
 		this.customerDao.delete(deletedCustomer);
 		return new SuccessResult();
 
+	}
+
+	@Override
+	public DataResult<Customer> getCustomerById(int id) {
+		Customer customer = this.customerDao.findById(id).get();
+		return new SuccessDataResult<Customer>(customer);
 	}
 
 	@Override

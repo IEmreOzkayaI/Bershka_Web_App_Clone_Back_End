@@ -3,6 +3,8 @@ package pure.bershka.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -70,7 +72,7 @@ public class Product{
             inverseJoinColumns = @JoinColumn(name = "size_id"))
     private List<Size> sizes;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @NotEmpty
     private List<Image> images;

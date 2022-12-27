@@ -4,8 +4,6 @@ import pure.bershka.apiControllers.CustomerController;
 import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.Result;
 import pure.bershka.entities.concretes.Customer;
-import pure.bershka.entities.concretes.Location;
-import pure.bershka.entities.concretes.Product;
 import pure.bershka.entities.dtos.CustomerDto;
 
 public interface CustomerService {
@@ -20,6 +18,7 @@ public interface CustomerService {
 	Result addBasket(int customerId, int productId);
 	Result removeBasket(int customerId, int productId);
 	Result addLocation(int customerId,String title, String address, String city, String town, String postCode);
+	DataResult<Customer> getCustomerById(int id);
 
 
 }

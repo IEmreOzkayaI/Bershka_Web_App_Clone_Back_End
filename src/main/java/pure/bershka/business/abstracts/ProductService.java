@@ -28,6 +28,8 @@ public interface ProductService {
     DataResult<List<Product>> getByFilterTypologyAndSizeAndColorAndPrice(String typology, String size, String color, BigDecimal min, BigDecimal max);
 
     DataResult<List<Product>> getByFilterTypology(String typology);
+    
+    DataResult<List<Product>> getByFilterTypologyAndGender(String typology,String gender);
 
     DataResult<List<Product>> getByFilterTypologyAndSize(String typology, String size);
 

@@ -12,5 +12,5 @@ public interface CustomerDao extends JpaRepository<Customer, Integer> {
     @Query("SELECT c FROM Customer c WHERE c.email = :email and c.password = :password")
     Customer getCustomerInfo(String email, String password); // yoksa email ve password mu??
 
-
+    Customer findByEmail(String email);
 }
