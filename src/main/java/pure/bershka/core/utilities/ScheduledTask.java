@@ -1,5 +1,6 @@
 package pure.bershka.core.utilities;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import java.sql.Date;
 
 
 @Component
-public class ScheduledTask {
+public class ScheduledTask implements DisposableBean {
     @Autowired
     LogService logService;
     private final String logFile = "my-app-log";
@@ -38,4 +39,8 @@ public class ScheduledTask {
         reader.close();
     }
 
+    @Override
+    public void destroy() throws Exception {
+        storeLog(logFile);
+    }
 }
