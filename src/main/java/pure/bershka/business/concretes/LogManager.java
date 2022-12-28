@@ -1,4 +1,3 @@
-/*
 package pure.bershka.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +23,9 @@ public class LogManager implements LogService {
         log.setDate(new Date());
         logDao.save(log);
     }
+
+    @Override
+    public void saveLog(Log log) {
+        logDao.save(log);
+    }
 }
-*/
