@@ -2,11 +2,7 @@
 package pure.bershka.apiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pure.bershka.business.abstracts.UserService;
 import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.ErrorResult;
@@ -27,9 +23,10 @@ public class UserController {
         this.userService = userService;
     }
 
-	@PostMapping("/sign-in")
+	@GetMapping ("/sign-in")
     public DataResult<User> signIn(String email, String password){
         return this.userService.signIn(email,password);
     }
+
 }
 

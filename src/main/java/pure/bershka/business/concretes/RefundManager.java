@@ -69,7 +69,6 @@ public class RefundManager implements RefundService {
             if (whoRefund.getOrders().get(i).getId() == productToRefund.getOrder().getId()){
                 stock.setCount(stock.getCount()+1);
                 this.stockDao.save(stock);
-                order.setTotalPrice(order.getTotalPrice()-refundMoney);
                 if(order.getDiscountCode() != null){
                     order.getDiscountCode().setAmount(order.getDiscountCode().getAmount()+1);
                 }
