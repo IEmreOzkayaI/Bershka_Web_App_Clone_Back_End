@@ -22,7 +22,7 @@ public class Log {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "content")
+    @Column(name = "content", length = 5000)
     private String message;
 
 }
