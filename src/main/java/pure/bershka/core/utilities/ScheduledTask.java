@@ -31,8 +31,11 @@ public class ScheduledTask implements DisposableBean {
             if(localCounter>=counter){
                 String date = line.split("|")[0];
                 String message = line.split(":")[1];
-                logService.saveLog(message);
-                counter = counter + 2;
+                if(!message.contains("insert into logs")){
+                    logService.saveLog(message);
+                }
+                counter++;
+                localCounter++;
             }else
                 localCounter++;
         }
