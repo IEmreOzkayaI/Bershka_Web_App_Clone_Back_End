@@ -28,6 +28,7 @@ public class CategoryController {
 
 	@GetMapping("/get-all")
 	public DataResult<List<Category>> getAll() {
+		System.out.println();
 		return this.categoryService.getAll();
 	};
 

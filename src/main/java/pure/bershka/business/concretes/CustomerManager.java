@@ -69,7 +69,7 @@ public class CustomerManager implements CustomerService {
 
 	@Override
 	public DataResult<Customer> getCustomer(String email, String password) {
-		return new SuccessDataResult<>(this.customerDao.getCustomerInfo(email,password));
+		return new SuccessDataResult<>(this.customerDao.getCustomerInfo(email,password),"Başarılı");
 	}
 
 

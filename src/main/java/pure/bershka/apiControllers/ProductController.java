@@ -64,8 +64,8 @@ public class ProductController {
 
 	@GetMapping("/get-by-filter-typology-size-color-price")
 	public DataResult<List<Product>> getByFilterTypologyAndSizeAndColorAndPrice(String typology, String size,
-			String color, BigDecimal min, BigDecimal max) {
-		return this.productService.getByFilterTypologyAndSizeAndColorAndPrice(typology, size, color, min, max);
+			String color, String min, String max) {
+		return this.productService.getByFilterTypologyAndSizeAndColorAndPrice(typology, size, color, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-typology-gender")
@@ -79,15 +79,15 @@ public class ProductController {
 	}
 
 	@GetMapping("/get-by-filter-typology-size-price")
-	public DataResult<List<Product>> getByFilterTypologyAndSizeAndPrice(String typology, String size, BigDecimal min,
-			BigDecimal max) {
-		return this.productService.getByFilterTypologyAndSizeAndPrice(typology, size, min, max);
+	public DataResult<List<Product>> getByFilterTypologyAndSizeAndPrice(String typology, String size, String min,
+			String max) {
+		return this.productService.getByFilterTypologyAndSizeAndPrice(typology, size, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-typology-color-price")
-	public DataResult<List<Product>> getByFilterTypologyAndColorAndPrice(String typology, String color, BigDecimal min,
-			BigDecimal max) {
-		return this.productService.getByFilterTypologyAndColorAndPrice(typology, color, min, max);
+	public DataResult<List<Product>> getByFilterTypologyAndColorAndPrice(String typology, String color, String min,
+			String max) {
+		return this.productService.getByFilterTypologyAndColorAndPrice(typology, color, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-typology-size")
@@ -101,8 +101,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/get-by-filter-typology-price")
-	public DataResult<List<Product>> getByFilterTypologyAndPrice(String typology, BigDecimal min, BigDecimal max) {
-		return this.productService.getByFilterTypologyAndPrice(typology, min, max);
+	public DataResult<List<Product>> getByFilterTypologyAndPrice(String typology, String min, String max) {
+		return this.productService.getByFilterTypologyAndPrice(typology, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-typology")
@@ -112,8 +112,8 @@ public class ProductController {
 
 	@GetMapping("/get-by-filter-category-size-color-price")
 	public DataResult<List<Product>> getByFilterCategoryAndSizeAndColorAndPrice(String category, String size,
-			String color, BigDecimal min, BigDecimal max) {
-		return this.productService.getByFilterCategoryAndSizeAndColorAndPrice(category, size, color, min, max);
+			String color, String min, String max) {
+		return this.productService.getByFilterCategoryAndSizeAndColorAndPrice(category, size, color, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-category-size-color")
@@ -122,15 +122,15 @@ public class ProductController {
 	}
 
 	@GetMapping("/get-by-filter-category-size-price")
-	public DataResult<List<Product>> getByFilterCategoryAndSizeAndPrice(String category, String size, BigDecimal min,
-			BigDecimal max) {
-		return this.productService.getByFilterCategoryAndSizeAndPrice(category, size, min, max);
+	public DataResult<List<Product>> getByFilterCategoryAndSizeAndPrice(String category, String size, String min,
+			String max) {
+		return this.productService.getByFilterCategoryAndSizeAndPrice(category, size, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-category-color-price")
-	public DataResult<List<Product>> getByFilterCategoryAndColorAndPrice(String category, String color, BigDecimal min,
-			BigDecimal max) {
-		return this.productService.getByFilterCategoryAndColorAndPrice(category, color, min, max);
+	public DataResult<List<Product>> getByFilterCategoryAndColorAndPrice(String category, String color, String min,
+			String max) {
+		return this.productService.getByFilterCategoryAndColorAndPrice(category, color, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-category-size")
@@ -144,8 +144,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/get-by-filter-category-price")
-	public DataResult<List<Product>> getByFilterCategoryAndPrice(String category, BigDecimal min, BigDecimal max) {
-		return this.productService.getByFilterCategoryAndPrice(category, min, max);
+	public DataResult<List<Product>> getByFilterCategoryAndPrice(String category, String min, String max) {
+		return this.productService.getByFilterCategoryAndPrice(category, BigDecimal.valueOf(Double.parseDouble(min)), BigDecimal.valueOf(Double.parseDouble(max)));
 	}
 
 	@GetMapping("/get-by-filter-category")
