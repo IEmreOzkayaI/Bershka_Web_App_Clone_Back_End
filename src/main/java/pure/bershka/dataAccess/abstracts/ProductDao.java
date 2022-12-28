@@ -13,7 +13,6 @@ import java.util.List;
 public interface ProductDao extends JpaRepository<Product, Integer> {
     List<Product> getByNameContainsIgnoreCase(String name);
 
-
     List<Product> getByGender(Gender gender);
 
     List<Product> getByDiscountPercentageGreaterThan(BigDecimal min);
