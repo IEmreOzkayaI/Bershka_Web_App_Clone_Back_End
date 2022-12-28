@@ -67,10 +67,6 @@ public class CustomerManager implements CustomerService {
 		
 	}
 
-	@Override
-	public DataResult<Customer> getCustomer(String email, String password) {
-		return new SuccessDataResult<>(this.customerDao.getCustomerInfo(email,password),"Başarılı");
-	}
 
 
 	// FOR ADMIN
@@ -123,6 +119,21 @@ public class CustomerManager implements CustomerService {
 	public DataResult<List<Order>> getOrder(int customerId) {
 		Customer customer = this.customerDao.findById(customerId).get();
 		return new SuccessDataResult<>(customer.getOrders());
+	}
+
+	@Override
+	public DataResult<List<Customer>> getAll() {
+		return new SuccessDataResult<>(this.customerDao.findAll());
+	}
+
+	@Override
+	public DataResult<List<Customer>> getAllInActive() {
+		return new SuccessDataResult<>(this.customerDao.getAllByActiveIsFalse());
+	}
+
+	@Override
+	public DataResult<List<Customer>> getAllActive() {
+		return new SuccessDataResult<>(this.customerDao.getAllActiveIsTrue());
 	}
 
 	@Override

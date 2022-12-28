@@ -30,10 +30,6 @@ public class CustomerController {
 	}
 	
 
-	@GetMapping("/get-customer")
-	public DataResult<Customer> getCustomer(String email, String password){
-		return this.customerService.getCustomer(email, password);
-	}
 	@GetMapping("/get-customer-id")
 	public DataResult<Customer> getCustomerById(int id){
 		return this.customerService.getCustomerById(id);
@@ -86,5 +82,17 @@ public class CustomerController {
 		return this.customerService.getRefund(customerId);
 	}
 
+	@GetMapping("/get-all")
+	public DataResult<List<Customer>> getAll(){
+		return this.customerService.getAll();
+	}
+	@GetMapping("/get-all-InActive")
+	public DataResult<List<Customer>> getAllInActive(){
+		return this.customerService.getAllInActive();
+	}
 
+	@GetMapping("/get-all-Active")
+	public DataResult<List<Customer>> getAllActive(){
+		return this.customerService.getAllActive();
+	}
 }

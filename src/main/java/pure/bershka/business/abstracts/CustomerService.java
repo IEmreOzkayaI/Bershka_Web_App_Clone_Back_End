@@ -11,8 +11,6 @@ import java.util.List;
 public interface CustomerService {
 	
 	Result signUp(CustomerDto customerDto);
-
-	DataResult<Customer> getCustomer(String email, String password);
 	Result updateCustomer(int customerId, Customer customer);
 	Result deleteCustomer(int customerId);
 	Result removeFavorites(int customerId, int productId);
@@ -27,6 +25,10 @@ public interface CustomerService {
 	DataResult<List<Location>> getLocation(int customerId);
 	DataResult<List<Refund>> getRefund(int customerId);
 	DataResult<List<Order>> getOrder(int customerId);
+	DataResult<List<Customer>> getAll();
+	DataResult<List<Customer>> getAllInActive();
+	DataResult<List<Customer>> getAllActive();
+
 
 
 }
