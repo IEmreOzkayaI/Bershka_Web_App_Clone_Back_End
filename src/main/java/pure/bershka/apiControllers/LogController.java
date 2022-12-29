@@ -1,12 +1,13 @@
-/*
+
 package pure.bershka.apiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pure.bershka.business.abstracts.LogService;
+import pure.bershka.core.utilities.Log;
+import pure.bershka.core.utilities.result.DataResult;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -23,5 +24,10 @@ public class LogController {
     public void add(){
         logService.saveLog("sa");
     }
+
+    @GetMapping("/get-all")
+    public DataResult<List<Log>> getAll(){
+        return this.logService.getAll();
+    }
 }
-*/
+

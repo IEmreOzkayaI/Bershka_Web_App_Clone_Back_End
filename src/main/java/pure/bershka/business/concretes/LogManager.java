@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pure.bershka.business.abstracts.LogService;
 import pure.bershka.core.utilities.Log;
+import pure.bershka.core.utilities.result.DataResult;
+import pure.bershka.core.utilities.result.SuccessDataResult;
 import pure.bershka.dataAccess.abstracts.LogDao;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class LogManager implements LogService {
@@ -27,5 +30,10 @@ public class LogManager implements LogService {
     @Override
     public void saveLog(Log log) {
         logDao.save(log);
+    }
+
+    @Override
+    public DataResult<List<Log>> getAll() {
+        return new SuccessDataResult<>(this.logDao.findAll());
     }
 }
