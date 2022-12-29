@@ -2,6 +2,7 @@ package pure.bershka.dataAccess.abstracts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pure.bershka.entities.concretes.*;
 
@@ -23,8 +24,9 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p JOIN p.typology t WHERE t.name = :typology")
     List<Product> getByFilterTypology(String typology);
 
+    //@Query(value = "CALL get_by_typology_and_gender(:typologyInput, :genderInput);", nativeQuery = true)
     @Query("SELECT p FROM Product p JOIN p.typology t WHERE t.name = :typology AND t.gender = :gender ")
-    List<Product> getByFilterTypologyAndGender(String typology,String gender);
+    List<Product> getByFilterTypologyAndGender( String typology,  String gender);
     
     @Query("SELECT p FROM Product p JOIN p.sizes s JOIN p.typology t WHERE t.name = :typology AND s.name = :size")
     List<Product> getByFilterTypologyAndSize(String typology, String size);

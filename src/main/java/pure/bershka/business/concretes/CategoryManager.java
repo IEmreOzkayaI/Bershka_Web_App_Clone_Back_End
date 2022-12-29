@@ -31,8 +31,8 @@ public class CategoryManager implements CategoryService {
 
     // FOR ADMIN
     @Override
-    public Result add(Category category) {
-        this.categoryDao.save(category);
+    public Result add(String categoryName) {
+        this.categoryDao.storedProcedure(categoryName);
         return new SuccessResult("Kategori eklendi");
     }
     @Override

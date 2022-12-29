@@ -7,7 +7,7 @@ import pure.bershka.entities.concretes.Category;
 import java.util.List;
 
 public interface CategoryService {
-    Result add(Category category);
+    Result add(String categoryName);
     DataResult<List<Category>> getAll();
 
     Result updateCategory(int categoryId, Category category);
