@@ -156,9 +156,13 @@ public class CustomerManager implements CustomerService {
 	public Result addFavorite(int customerId, int productId) {
 		Customer toAdd = this.customerDao.findById(customerId).get();
 		Product product = this.productDao.findById(productId).get();
-		toAdd.getFavorites().add(product);
-		this.customerDao.save(toAdd);
-		return new SuccessResult("Ürün favorilere eklendi.");
+		if (toAdd.getFavorites().contains(product))
+			return new ErrorResult("Ürün favorilerde bulunuyor.");
+		else {
+			toAdd.getFavorites().add(product);
+			this.customerDao.save(toAdd);
+			return new SuccessResult("Ürün favorilere eklendi.");
+		}
 	}
 
 	@Override
@@ -193,11 +197,20 @@ public class CustomerManager implements CustomerService {
 			for (int i = 0; i < removeFromBasket.getBasket().size(); i++) {
 				if(removeFromBasket.getBasket().get(i).getProduct().getId() == productId &&
 						removeFromBasket.getBasket().get(i).getSize().getId() == sizeId){
-					removeFromBasket.getBasket().remove(i);
-					Item itemToDelete = this.itemDao.getItemByProductIdAndSizeId(productId,sizeId);
-					this.customerDao.save(removeFromBasket);
-					this.itemDao.delete(itemToDelete);
-					return new SuccessResult("Ürün sepetten çıkarıldı.");
+					if(removeFromBasket.getBasket().get(i).getAmount() == 1){
+						removeFromBasket.getBasket().remove(i);
+						Item itemToDelete = this.itemDao.getItemByProductIdAndSizeId(productId,sizeId);
+						this.customerDao.save(removeFromBasket);
+						this.itemDao.delete(itemToDelete);
+						return new SuccessResult("Ürün sepetten çıkarıldı.");
+					}
+					else {
+						int newAmount = removeFromBasket.getBasket().get(i).getAmount();
+						removeFromBasket.getBasket().get(i).setAmount(newAmount - 1);
+						this.customerDao.save(removeFromBasket);
+						return new SuccessResult("Ürün sepetten çıkarıldı.");
+					}
+
 				}
 			}
 		}
