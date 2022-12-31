@@ -38,7 +38,7 @@ public class OrderController {
         return this.orderService.updateOrder(orderId, order);
     }
     @PostMapping("/give-order")
-    public Result giveOrder(int customerId, int billLocationId, int locationId, int discountCodeId){
-        return this.orderService.giveOrder(customerId,billLocationId,locationId,discountCodeId);
+    public Result giveOrder(int customerId, int billLocationId, int locationId, String discountCode){
+        return this.orderService.giveOrder(customerId,billLocationId,locationId,discountCode);
     }
 }

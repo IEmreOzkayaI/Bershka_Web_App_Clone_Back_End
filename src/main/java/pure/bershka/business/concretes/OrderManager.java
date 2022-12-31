@@ -67,11 +67,11 @@ public class OrderManager implements OrderService {
     }
 
     @Override
-    public Result giveOrder(int customerId, int billLocationId, int locationId, int discountCodeId) {
+    public Result giveOrder(int customerId, int billLocationId, int locationId, String discountCodeName) {
         Customer whoBuys = this.customerDao.findById(customerId).get();
         Location location = this.locationDao.findById(locationId).get();
         Location billLocation = this.locationDao.findById(billLocationId).get();
-        DiscountCode discountCode = this.discountCodeDao.findById(discountCodeId).get(); // default sıfır indirim için id = 101
+        DiscountCode discountCode = this.discountCodeDao.getByCode(discountCodeName); // default sıfır indirim için id = 101
         int totalPrice = 0;
         for (int i = 0; i < whoBuys.getBasket().size(); i++) {
             if (whoBuys.getBasket().get(i).getProduct().getDiscountPercentage().intValue() != 0){
