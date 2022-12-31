@@ -22,7 +22,7 @@ public class CategoryController {
 	}
 
 	@PostMapping(value = "/add")
-	public Result add(@RequestBody Category category) {
+	public Result add( String category) {
 		return this.categoryService.add(category);
 	}
 

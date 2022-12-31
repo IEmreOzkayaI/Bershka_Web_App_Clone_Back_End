@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import pure.bershka.business.abstracts.LogService;
+
+import javax.annotation.PreDestroy;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
