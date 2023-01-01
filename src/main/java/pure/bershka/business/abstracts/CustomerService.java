@@ -29,6 +29,7 @@ public interface CustomerService {
 	DataResult<List<Customer>> getAllInActive();
 	DataResult<List<Customer>> getAllActive();
 	Result increaseBudget(int customerId, int amount);
+	Result changeEmailPassword(int customerId, String email, String password);
 
 
 }

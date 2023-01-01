@@ -146,6 +146,35 @@ public class CustomerManager implements CustomerService {
 	}
 
 	@Override
+	public Result changeEmailPassword(int customerId, String email, String password) {
+		Customer customer = this.customerDao.findById(customerId).get();
+		String previousEmail = customer.getEmail();
+		String previousPassword = customer.getPassword();
+		if (!previousEmail.equals(email) && previousPassword.equals(password)){
+			customer.setEmail(email);
+			this.customerDao.save(customer);
+			return new SuccessResult("Email başarı ile güncellendi.");
+		}
+		else if (!previousPassword.equals(password) && previousEmail.equals(email)){
+			customer.setPassword(password);
+			this.customerDao.save(customer);
+			return new SuccessResult("Password başarı ile güncellendi.");
+		}
+		else if (!previousPassword.equals(password) && !previousEmail.equals(email)){
+			customer.setEmail(email);
+			customer.setPassword(password);
+			this.customerDao.save(customer);
+			return new SuccessResult("Email ve password değişikliği yapıldı");
+		}
+		else if (previousPassword.equals(password) && previousEmail.equals(email))
+			return new ErrorResult("Girilen bilgiler, önceki bilgiler ile aynı!");
+
+		return new ErrorResult("Güncelleme işlemince bir hata oluştu");
+
+
+	}
+
+	@Override
 	public Result removeFavorites(int customerId, int productId) {
 		Customer removeFromFavorite = this.customerDao.findById(customerId).get();
 		if (removeFromFavorite.getFavorites().size() != 0){

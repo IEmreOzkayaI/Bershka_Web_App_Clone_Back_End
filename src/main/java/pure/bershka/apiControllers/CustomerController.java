@@ -100,4 +100,8 @@ public class CustomerController {
 	public Result increaseBudget(int customerId, int amount){
 		return this.customerService.increaseBudget(customerId,amount);
 	}
+	@PostMapping("/change-email-password")
+	public Result changeEmailPassword(int customerId, String email, String password){
+		return this.customerService.changeEmailPassword(customerId,email,password);
+	}
 }
