@@ -137,6 +137,15 @@ public class CustomerManager implements CustomerService {
 	}
 
 	@Override
+	public Result increaseBudget(int customerId, int amount) {
+		Customer customer = this.customerDao.findById(customerId).get();
+		int previousBudget = customer.getBudget();
+		customer.setBudget(previousBudget + amount);
+		this.customerDao.save(customer);
+		return new SuccessResult("Müşterinin bütçesi arttırıldı.");
+	}
+
+	@Override
 	public Result removeFavorites(int customerId, int productId) {
 		Customer removeFromFavorite = this.customerDao.findById(customerId).get();
 		if (removeFromFavorite.getFavorites().size() != 0){

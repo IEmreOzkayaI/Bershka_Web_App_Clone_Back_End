@@ -28,7 +28,7 @@ public interface CustomerService {
 	DataResult<List<Customer>> getAll();
 	DataResult<List<Customer>> getAllInActive();
 	DataResult<List<Customer>> getAllActive();
-
+	Result increaseBudget(int customerId, int amount);
 
 
 }

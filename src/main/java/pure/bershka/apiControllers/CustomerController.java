@@ -95,4 +95,9 @@ public class CustomerController {
 	public DataResult<List<Customer>> getAllActive(){
 		return this.customerService.getAllActive();
 	}
+
+	@PostMapping("/increase-budget")
+	public Result increaseBudget(int customerId, int amount){
+		return this.customerService.increaseBudget(customerId,amount);
+	}
 }
