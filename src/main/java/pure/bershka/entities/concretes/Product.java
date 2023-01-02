@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pure.bershka.entities.dtos.ProductDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -74,5 +75,17 @@ public class Product{
         this.price = product.getPrice();
         this.gender = product.getGender();
         this.discountPercentage = product.getDiscountPercentage();
+    }
+
+    public Product(ProductDto productDto){
+        this.price = productDto.getPrice();
+        this.name = productDto.getName();
+        if(productDto.getGender().equalsIgnoreCase("KADIN")) {
+            this.gender = "FEMALE";
+        }
+        if(productDto.getGender().equalsIgnoreCase("ERKEK")) {
+            this.gender = "MALE";
+        }
+        this.discountPercentage = productDto.getDiscountPercentage();
     }
 }

@@ -21,16 +21,19 @@ public class ProductManager implements ProductService {
 	private TypologyDao typologyDao;
 	private SizeDao sizeDao;
 	private StockDao stockDao;
+
+	private ImageDao imageDao;
 	@Autowired
 	public ProductManager(ProductDao productDao,CategoryDao categoryDao,
 						  ColorDao colorDao,TypologyDao typologyDao,
-						  SizeDao sizeDao, StockDao stockDao) {
+						  SizeDao sizeDao, StockDao stockDao, ImageDao imageDao) {
 		this.productDao = productDao;
 		this.categoryDao=categoryDao;
 		this.colorDao=colorDao;
 		this.sizeDao = sizeDao;
 		this.typologyDao =typologyDao;
 		this.stockDao = stockDao;
+		this.imageDao = imageDao;
 	}
 
 	@Override
@@ -40,36 +43,27 @@ public class ProductManager implements ProductService {
 
 	@Override
 	public Result add(ProductDto productDto) {
-		Product product = new Product();
-		List<Image> images = new ArrayList<Image>();
-		images.add(new Image(0, productDto.getImg_1(), product));
-		images.add(new Image(0, productDto.getImg_2(), product));
-		images.add(new Image(0, productDto.getImg_3(), product));
-		product.setImages(images);
-		product.setName(productDto.getName());
-		product.setPrice(BigDecimal.valueOf(productDto.getPrice()));
+		Product product = new Product(productDto);
+		Image img1 = new Image(0, productDto.getImg_1(), product);
+		Image img2 = new Image(0, productDto.getImg_2(), product);
+		Image img3 = new Image(0, productDto.getImg_3(), product);
 		product.setColor(this.colorDao.findById(productDto.getColorId()).get());
-		if(productDto.getGender().equalsIgnoreCase("KADIN")) {
-			product.setGender("FEMALE");
-		}
-		if(productDto.getGender().equalsIgnoreCase("ERKEK")) {
-			product.setGender("MALE");
-		}
 		product.setCategory(this.categoryDao.findById(productDto.getCategoryId()).get());
 		product.setTypology(this.typologyDao.findById(productDto.getTypologyId()).get());
-		List<Size> sizes = new ArrayList<Size>();
+		List<Size> sizes = new ArrayList<>();
 		for (int i = 0; i < productDto.getSizeId().length; i++) {
 			sizes.add(this.sizeDao.findById(productDto.getSizeId()[i]).get());
 		}
 		product.setSizes(sizes);
-		product.setDiscountPercentage(productDto.getDiscountPercentage());
 
 		this.productDao.save(product);
+		this.imageDao.save(img1);
+		this.imageDao.save(img2);
+		this.imageDao.save(img3);
+
 		for (int i = 0; i < productDto.getSizeId().length; i++) {
-			Stock stock = new Stock();
-			stock.setCount(20);
-			stock.setSize(product.getSizes().get(i));
-			stock.setProduct(product);
+			Stock stock = new Stock(product,sizes.get(i),productDto.getAmount()[i]);
+			//stock.setStock(new Stock(0,product,sizes.get(i),productDto.getAmount()[i]));
 			this.stockDao.save(stock);
 		}
 		return new SuccessResult("Ürün eklendi");

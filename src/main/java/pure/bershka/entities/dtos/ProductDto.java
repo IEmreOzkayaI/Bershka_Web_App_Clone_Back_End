@@ -10,16 +10,17 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
-	private String img_1;
-	private String img_2;
-	private String img_3;
     private String name;
-    private int price;
-    private int colorId;
+    private BigDecimal price;
     private String gender;
-    private int categoryId;
-    private int typologyId;
-
-    private int[] sizeId;
     private BigDecimal discountPercentage;
+    private int categoryId;
+    private int colorId;
+    private int typologyId;
+    private String img_1;
+    private String img_2;
+    private String img_3;
+
+    private int[] amount;
+    private int[] sizeId;
 }

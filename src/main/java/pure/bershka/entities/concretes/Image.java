@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
