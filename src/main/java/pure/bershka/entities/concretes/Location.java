@@ -35,6 +35,10 @@ public class Location {
     @NotBlank(message = "City cannot be empty.")
     private String city;
 
+    @Column(name = "town")
+    @NotBlank(message = "Town cannot be empty.")
+    private String town;
+
     @Column(name = "post_code")
     @NotBlank(message = "Post code cannot be empty.")
     private String postCode;
@@ -55,11 +59,14 @@ public class Location {
     @ManyToMany(mappedBy = "locations", fetch = FetchType.LAZY)
     private List<Customer> customers;
 
+
+
     public Location(String title, String address, String city, String town, String postCode) {
         this.title = title;
         this.address = address;
         this.city = city;
         this.postCode = postCode;
+        this.town = town;
     }
 
     public void setLocation(Location location){
@@ -67,6 +74,7 @@ public class Location {
         this.city = location.getCity();
         this.address = location.getAddress();
         this.postCode = location.getPostCode();
+        this.town = location.getTown();
     }
 
 }
