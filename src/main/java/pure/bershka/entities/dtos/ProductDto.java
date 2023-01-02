@@ -19,5 +19,7 @@ public class ProductDto {
     private String gender;
     private int categoryId;
     private int typologyId;
-    private int[] sizeId;   
+
+    private int[] sizeId;
+    private BigDecimal discountPercentage;
 }

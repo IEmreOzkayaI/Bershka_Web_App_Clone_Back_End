@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pure.bershka.business.abstracts.ProductService;
 import pure.bershka.core.utilities.result.*;
-import pure.bershka.dataAccess.abstracts.CategoryDao;
-import pure.bershka.dataAccess.abstracts.ColorDao;
-import pure.bershka.dataAccess.abstracts.ProductDao;
-import pure.bershka.dataAccess.abstracts.TypologyDao;
+import pure.bershka.dataAccess.abstracts.*;
 import pure.bershka.entities.concretes.*;
 import pure.bershka.entities.dtos.ProductDto;
 
@@ -22,11 +19,18 @@ public class ProductManager implements ProductService {
 	private CategoryDao categoryDao;
 	private ColorDao colorDao;
 	private TypologyDao typologyDao;
+	private SizeDao sizeDao;
+	private StockDao stockDao;
 	@Autowired
-	public ProductManager(ProductDao productDao,CategoryDao categoryDao,ColorDao colorDao,TypologyDao typologyDao) {
+	public ProductManager(ProductDao productDao,CategoryDao categoryDao,
+						  ColorDao colorDao,TypologyDao typologyDao,
+						  SizeDao sizeDao, StockDao stockDao) {
 		this.productDao = productDao;
 		this.categoryDao=categoryDao;
 		this.colorDao=colorDao;
+		this.sizeDao = sizeDao;
+		this.typologyDao =typologyDao;
+		this.stockDao = stockDao;
 	}
 
 	@Override
@@ -44,19 +48,30 @@ public class ProductManager implements ProductService {
 		product.setImages(images);
 		product.setName(productDto.getName());
 		product.setPrice(BigDecimal.valueOf(productDto.getPrice()));
-		product.setColor(colorDao.findById(productDto.getColorId()).get());
+		product.setColor(this.colorDao.findById(productDto.getColorId()).get());
 		if(productDto.getGender().equalsIgnoreCase("KADIN")) {
 			product.setGender("FEMALE");
 		}
 		if(productDto.getGender().equalsIgnoreCase("ERKEK")) {
 			product.setGender("MALE");
 		}
-		product.setCategory(categoryDao.findById(productDto.getCategoryId()).get());
-		product.setTypology(typologyDao.findById(productDto.getTypologyId()).get());
+		product.setCategory(this.categoryDao.findById(productDto.getCategoryId()).get());
+		product.setTypology(this.typologyDao.findById(productDto.getTypologyId()).get());
 		List<Size> sizes = new ArrayList<Size>();
+		for (int i = 0; i < productDto.getSizeId().length; i++) {
+			sizes.add(this.sizeDao.findById(productDto.getSizeId()[i]).get());
+		}
 		product.setSizes(sizes);
+		product.setDiscountPercentage(productDto.getDiscountPercentage());
 
 		this.productDao.save(product);
+		for (int i = 0; i < productDto.getSizeId().length; i++) {
+			Stock stock = new Stock();
+			stock.setCount(20);
+			stock.setSize(product.getSizes().get(i));
+			stock.setProduct(product);
+			this.stockDao.save(stock);
+		}
 		return new SuccessResult("Ürün eklendi");
 	}
 

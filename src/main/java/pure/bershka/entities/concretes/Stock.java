@@ -44,4 +44,10 @@ public class Stock {
     public void decreaseCount(int value){
         this.count = this.getCount() - value;
     }
+
+    public Stock(Product product, Size size, int count) {
+        this.product = product;
+        this.size = size;
+        this.count = count;
+    }
 }
