@@ -48,8 +48,23 @@ public class OrderManager implements OrderService {
     @Override
     public Result deleteOrder(int orderId) {
         Order deletedOrder = this.orderDao.findById(orderId).get();
-        this.orderDao.delete(deletedOrder);
-        return new Result(true);
+        List<OrderDetail> orderDetailList = deletedOrder.getOrderDetails();
+        for (int i = 0; i < orderDetailList.size(); i++) {
+            Stock stock = this.stockDao.getProduct(orderDetailList.get(i).getProduct().getId(),
+                    orderDetailList.get(i).getSize().getId());
+            stock.setCount(stock.getCount()+1);
+            orderDetailList.get(i).setCanceled(true);
+            this.orderDetailDao.save(orderDetailList.get(i));
+        }
+        deletedOrder.setCanceled(true);
+        int previousBudget = deletedOrder.getCustomer().getBudget();
+        int orderPrice = deletedOrder.getTotalPrice();
+        deletedOrder.getCustomer().setBudget(previousBudget + orderPrice);
+        deletedOrder.getDiscountCode().setAmount(deletedOrder.getDiscountCode().getAmount()+1);
+        LocalDateTime now = LocalDateTime.now();
+        deletedOrder.setCancelDate(now);
+        this.orderDao.save(deletedOrder);
+        return new SuccessResult("Sipariş iptal edildi.");
     }
 
     @Override
@@ -106,13 +121,14 @@ public class OrderManager implements OrderService {
         totalPrice -= discountCode.getPrice();
         discountCode.setAmount(discountCode.getAmount()-1);
         this.discountCodeDao.save(discountCode);
-        Order order = new Order(totalPrice,now,whoBuys,location,
-                billLocation,discountCode);
+        boolean isCanceled = false;
+        Order order = new Order(totalPrice,now,null,whoBuys,location,
+                billLocation,discountCode,isCanceled);
         this.orderDao.save(order);
 
         for (int i = 0; i < whoBuys.getBasket().size(); i++) {
             OrderDetail orderDetail = new OrderDetail(order,whoBuys.getBasket().get(i).getProduct(),
-                    this.sizeDao.findById(whoBuys.getBasket().get(i).getSize().getId()).get(),whoBuys.getBasket().get(i).getAmount(),false);
+                    this.sizeDao.findById(whoBuys.getBasket().get(i).getSize().getId()).get(),whoBuys.getBasket().get(i).getAmount(),false,false);
             this.orderDetailDao.save(orderDetail);
         }
         this.addOrder(order);

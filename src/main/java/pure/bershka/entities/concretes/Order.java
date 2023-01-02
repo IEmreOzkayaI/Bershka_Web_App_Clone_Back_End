@@ -36,6 +36,10 @@ public class Order {
     @NotNull(message = "Creation date cannot be empty.")
     private LocalDateTime creationDate;
 
+    @Column(name = "cancel_date")
+    private LocalDateTime cancelDate;
+
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "customer_id")
@@ -51,6 +55,10 @@ public class Order {
     @JoinColumn(name = "billing_location_id")
     @NotNull(message = "Billing Location cannot be empty.")
     private Location billingLocation;
+
+    @Column(name = "is_canceled")
+    @NotNull(message = "To check this product's cancel status, it should be given false as default.")
+    private boolean isCanceled;
 
     @ManyToOne
     @JoinColumn(name = "discount_code_id")
@@ -68,15 +76,17 @@ public class Order {
     @OneToMany(mappedBy = "size", fetch = FetchType.LAZY)
     private List<OrderDetail> sizes;
 
-    public Order(int totalPrice, LocalDateTime creationDate, Customer customer,
+    public Order(int totalPrice, LocalDateTime creationDate, LocalDateTime cancelDate, Customer customer,
                  Location location, Location billingLocation, DiscountCode
-                         discountCode) {
+                         discountCode, boolean isCanceled) {
         this.totalPrice = totalPrice;
         this.creationDate = creationDate;
+        this.cancelDate = cancelDate;
         this.customer = customer;
         this.location = location;
         this.billingLocation = billingLocation;
         this.discountCode = discountCode;
+        this.isCanceled = isCanceled;
     }
 
 //    public Order(Date creationDate, int totalPrice,

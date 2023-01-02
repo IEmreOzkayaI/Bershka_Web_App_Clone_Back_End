@@ -46,14 +46,20 @@ public class OrderDetail {
 	private int amount;
 
 	@Column(name = "isRefunded")
-	@NotNull(message = "To check this product's refund status, it should be given false default.")
+	@NotNull(message = "To check this product's refund status, it should be given false as default.")
 	private boolean isRefunded;
 
-	public OrderDetail(Order order, Product product, Size size, int amount, boolean isRefunded) {
+
+	@Column(name = "is_canceled")
+	@NotNull(message = "To check this product's cancel status, it should be given false as default.")
+	private boolean isCanceled;
+
+	public OrderDetail(Order order, Product product, Size size, int amount, boolean isRefunded, boolean isCanceled) {
 		this.order = order;
 		this.product = product;
 		this.size = size;
 		this.amount = amount;
 		this.isRefunded = isRefunded;
+		this.isCanceled = isCanceled;
 	}
 }
