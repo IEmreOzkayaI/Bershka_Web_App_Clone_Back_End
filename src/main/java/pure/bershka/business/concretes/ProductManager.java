@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pure.bershka.business.abstracts.ProductService;
 import pure.bershka.core.utilities.result.*;
-
+import pure.bershka.dataAccess.abstracts.CategoryDao;
+import pure.bershka.dataAccess.abstracts.ColorDao;
 import pure.bershka.dataAccess.abstracts.ProductDao;
-
+import pure.bershka.dataAccess.abstracts.TypologyDao;
 import pure.bershka.entities.concretes.*;
+import pure.bershka.entities.dtos.ProductDto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,10 +19,14 @@ import java.util.List;
 @Service
 public class ProductManager implements ProductService {
 	private ProductDao productDao;
-
+	private CategoryDao categoryDao;
+	private ColorDao colorDao;
+	private TypologyDao typologyDao;
 	@Autowired
-	public ProductManager(ProductDao productDao) {
+	public ProductManager(ProductDao productDao,CategoryDao categoryDao,ColorDao colorDao,TypologyDao typologyDao) {
 		this.productDao = productDao;
+		this.categoryDao=categoryDao;
+		this.colorDao=colorDao;
 	}
 
 	@Override
@@ -29,7 +35,27 @@ public class ProductManager implements ProductService {
 	}
 
 	@Override
-	public Result add(Product product) {
+	public Result add(ProductDto productDto) {
+		Product product = new Product();
+		List<Image> images = new ArrayList<Image>();
+		images.add(new Image(0, productDto.getImg_1(), product));
+		images.add(new Image(0, productDto.getImg_2(), product));
+		images.add(new Image(0, productDto.getImg_3(), product));
+		product.setImages(images);
+		product.setName(productDto.getName());
+		product.setPrice(BigDecimal.valueOf(productDto.getPrice()));
+		product.setColor(colorDao.findById(productDto.getColorId()).get());
+		if(productDto.getGender().equalsIgnoreCase("KADIN")) {
+			product.setGender("FEMALE");
+		}
+		if(productDto.getGender().equalsIgnoreCase("ERKEK")) {
+			product.setGender("MALE");
+		}
+		product.setCategory(categoryDao.findById(productDto.getCategoryId()).get());
+		product.setTypology(typologyDao.findById(productDto.getTypologyId()).get());
+		List<Size> sizes = new ArrayList<Size>();
+		product.setSizes(sizes);
+
 		this.productDao.save(product);
 		return new SuccessResult("Ürün eklendi");
 	}

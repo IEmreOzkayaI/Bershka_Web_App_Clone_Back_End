@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.Result;
 import pure.bershka.entities.concretes.*;
+import pure.bershka.entities.dtos.ProductDto;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface ProductService {
     DataResult<List<Product>> getAll();
-    Result add(Product product);
+    Result add(ProductDto productDto);
 
     Result update(int productId, Product product);
 
@@ -31,6 +32,7 @@ public interface ProductService {
     
     DataResult<List<Product>> getByFilterTypologyAndGender(String typology,String gender);
 
+    // ------------------------------------- For page in filter
     DataResult<List<Product>> getByFilterTypologyAndSize(String typology, String size);
 
     DataResult<List<Product>> getByFilterTypologyAndColor(String typology, String color);

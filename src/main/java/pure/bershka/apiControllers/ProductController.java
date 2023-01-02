@@ -6,6 +6,7 @@ import pure.bershka.business.abstracts.ProductService;
 import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.Result;
 import pure.bershka.entities.concretes.*;
+import pure.bershka.entities.dtos.ProductDto;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -28,8 +29,8 @@ public class ProductController {
 	}
 
 	@PostMapping("/add")
-	public Result add(@RequestBody Product product) {
-		return this.productService.add(product);
+	public Result add(@RequestBody ProductDto productDto) {
+		return this.productService.add(productDto);
 	}
 
 	@PutMapping("/update")

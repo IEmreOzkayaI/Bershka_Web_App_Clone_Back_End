@@ -45,7 +45,7 @@ public class UserManager implements UserService {
 			if (flag && !admin.getPassword().equals(password))
 				return new ErrorDataResult<>("Invalid password!");
 			else if (flag && admin.getPassword().equals(password)) {
-				return new SuccessDataResult<>(this.adminDao.getByEmail(email),"Başarılı");
+				return new SuccessDataResult<>(this.adminDao.getByEmail(email),"Admin");
 			}
 		}
 		else {

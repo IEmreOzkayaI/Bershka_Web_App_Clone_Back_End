@@ -37,7 +37,7 @@ public class RefundController {
     }
 
     @PostMapping("/request-refund") // Refund işlemi için bu kullanılır.
-    public Result requestRefund(String cause, int orderDetailId){
+    public Result requestRefund(@RequestParam String cause,@RequestParam int orderDetailId){
         return this.refundService.startRefund(cause,orderDetailId);
     }
 }
