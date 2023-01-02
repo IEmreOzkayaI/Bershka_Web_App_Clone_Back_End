@@ -128,7 +128,7 @@ public class CustomerManager implements CustomerService {
 
 	@Override
 	public DataResult<List<Customer>> getAllInActive() {
-		return new SuccessDataResult<>(this.customerDao.getAllByActiveIsFalse());
+		return new SuccessDataResult<>(this.customerDao.getAllByActiveIsFalse(),"Inactive müşteriler getirildi.");
 	}
 
 	@Override

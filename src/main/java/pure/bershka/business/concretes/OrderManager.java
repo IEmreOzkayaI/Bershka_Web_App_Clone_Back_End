@@ -8,6 +8,9 @@ import pure.bershka.core.utilities.result.*;
 import pure.bershka.dataAccess.abstracts.*;
 import pure.bershka.entities.concretes.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,9 @@ public class OrderManager implements OrderService {
     private DiscountCodeDao discountCodeDao;
     private LocationDao locationDao;
 
+    @PersistenceUnit
+    EntityManagerFactory emf;
+
     @Autowired
     public OrderManager(OrderDao orderDao, CustomerDao customerDao,
                         StockDao stockDao,ProductDao productDao,
@@ -36,6 +42,7 @@ public class OrderManager implements OrderService {
         this.orderDetailDao = orderDetailDao;
         this.discountCodeDao = discountCodeDao;
         this.locationDao = locationDao;
+
     }
 
 
@@ -124,6 +131,12 @@ public class OrderManager implements OrderService {
         boolean isCanceled = false;
         Order order = new Order(totalPrice,now,null,whoBuys,location,
                 billLocation,discountCode,isCanceled);
+
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(order);
+        em.getTransaction().commit();
+
         this.orderDao.save(order);
 
         for (int i = 0; i < whoBuys.getBasket().size(); i++) {

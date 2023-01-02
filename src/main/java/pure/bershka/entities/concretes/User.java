@@ -35,7 +35,7 @@ public class User {
 
     @Column(name = "password")
     @NotBlank(message = "Password cannot be empty!")
-    @Size(min = 4, max = 15,message = "Password must be minimum 4, maximum 15 length!")
+    @Size(min = 6, max = 15,message = "Password must be minimum 6, maximum 15 length!")
     private String password;
 
     @Column(name = "date_of_register")
