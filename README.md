@@ -1,4 +1,5 @@
 # Bershka_Web_App_Clone_Back_End
+[High Resolution Document](https://github.com/IEmreOzkayaI/Bershka_Web_App_Clone_Back_End/files/10855575/repo.pdf)
 ![1](https://user-images.githubusercontent.com/72611040/222003548-abe0b225-4f59-4e57-8a8d-9fa16dcdaa62.jpg)
 ![2](https://user-images.githubusercontent.com/72611040/222003549-5646aa1e-39d5-4e76-970c-3e043aee13d4.jpg)
 ![3](https://user-images.githubusercontent.com/72611040/222003550-5ec3b136-c5b8-4a2c-82de-7276b3073419.jpg)
