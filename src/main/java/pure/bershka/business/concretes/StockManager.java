@@ -1,9 +1,13 @@
 package pure.bershka.business.concretes;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pure.bershka.business.abstracts.StockService;
+import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.Result;
+import pure.bershka.core.utilities.result.SuccessDataResult;
 import pure.bershka.core.utilities.result.SuccessResult;
 import pure.bershka.dataAccess.abstracts.StockDao;
 import pure.bershka.entities.concretes.Stock;
@@ -37,4 +41,11 @@ public class StockManager implements StockService {
         this.stockDao.delete(deletedStock);
         return new SuccessResult("true");
     }
+
+	@Override
+	public DataResult<List<Stock>> getProductSizes(int productId) {
+		return new SuccessDataResult<List<Stock>>(this.stockDao.getProductSizes(productId)); 
+	}
+
+	
 }

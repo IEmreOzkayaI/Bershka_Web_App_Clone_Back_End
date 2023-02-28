@@ -1,6 +1,9 @@
 package pure.bershka.core.utilities.result;
 
+import java.util.Optional;
+
 import lombok.Getter;
+import pure.bershka.entities.concretes.Size;
 
 @Getter
 public class SuccessDataResult<T> extends DataResult<T> {
@@ -20,4 +23,8 @@ public class SuccessDataResult<T> extends DataResult<T> {
     public SuccessDataResult() {
         super(null, true);
     }
+
+
+
+
 }

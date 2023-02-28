@@ -47,6 +47,7 @@ public class CustomerManager implements CustomerService {
 			location.setCity(customerDto.getCity());
 			location.setPostCode(customerDto.getPostalCode());
 			location.setTitle(customerDto.getAddressTitle());
+			location.setTown(customerDto.getTown());
 			location.setId(0);
 			this.locationDao.save(location);
 

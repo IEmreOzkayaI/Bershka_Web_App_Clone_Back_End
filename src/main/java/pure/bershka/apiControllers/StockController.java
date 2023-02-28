@@ -1,9 +1,13 @@
 package pure.bershka.apiControllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pure.bershka.business.abstracts.StockService;
+import pure.bershka.core.utilities.result.DataResult;
 import pure.bershka.core.utilities.result.Result;
+import pure.bershka.core.utilities.result.SuccessDataResult;
 import pure.bershka.entities.concretes.Stock;
 
 @CrossOrigin
@@ -29,4 +33,9 @@ public class StockController {
     public Result delete(int stockId){
         return this.stockService.deleteStock(stockId);
     }
+    
+	@GetMapping("/get-product-with-id")
+	public DataResult<List<Stock>> getProductSizes(int productId) {
+		return this.stockService.getProductSizes(productId); 
+	}
 }

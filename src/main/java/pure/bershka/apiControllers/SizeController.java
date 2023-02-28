@@ -32,4 +32,6 @@ public class SizeController {
     public Result delete(int sizeId){
         return this.sizeService.deleteSize(sizeId);
     }
+
+
 }
